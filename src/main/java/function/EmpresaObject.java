@@ -14,7 +14,6 @@ public class EmpresaObject {
         this.correo = correo;
         this.miCatalogo = new CatalogoFunctions();
 }
-    public EmpresaObject() { this.miCatalogo = new CatalogoFunctions();}
     
     
     public String getNombre() {return nombre;}
@@ -22,7 +21,4 @@ public class EmpresaObject {
     public String getGiro() {return giro;}
     public String getCorreo() {return correo;}
     
-    public CatalogoFunctions getCatalogo() {
-        return miCatalogo;
-    }
 }

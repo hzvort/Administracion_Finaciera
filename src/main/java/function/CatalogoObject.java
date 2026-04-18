@@ -1,10 +1,10 @@
 package function;
 
-public class CuentaObject {
+public class CatalogoObject {
    private String codigo,nombre,tipo, naturaleza;
    private double cantidad;
    
-   public CuentaObject(String codigo, String nombre, String tipo, String naturaleza, double cantidad) {
+   public CatalogoObject(String codigo, String nombre, String tipo, String naturaleza, double cantidad) {
        this.codigo = codigo;
        this.nombre = nombre;
        this.tipo = tipo;

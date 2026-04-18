@@ -3,18 +3,14 @@ package function;
 import java.util.ArrayList;
 
 public class CatalogoFunctions {
-     private ArrayList<CuentaObject> miCatalogo;
+     private ArrayList<CatalogoObject> miCatalogo;
      
      public CatalogoFunctions() {
         miCatalogo = new ArrayList<>(); 
      }
-     
-     public ArrayList<CuentaObject> getMiCatalogo() {
-        return miCatalogo;
-    }
     
-    public void agregarCatalogo(CuentaObject nuevaCuenta) {
-        this.miCatalogo.add(nuevaCuenta);
+    public void agregarCatalogo(CatalogoObject nuevaCuenta) {
+        miCatalogo.add(nuevaCuenta);
     }
     
     public void eliminarCatalogo(int valor) {
@@ -23,7 +19,12 @@ public class CatalogoFunctions {
         }
     }
     
-    public boolean empty() {
+     public ArrayList<CatalogoObject> getMiCatalogo() {
+        return miCatalogo;
+    }
+     
+     public boolean empty() {
         if (miCatalogo.isEmpty()) {return true;} else {return false;}
     }
+     
 }
