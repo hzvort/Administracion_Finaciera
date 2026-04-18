@@ -164,6 +164,7 @@ public class AddEmpresaForm extends javax.swing.JPanel {
 
     private void acceptBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_acceptBtnMousePressed
         if (!emptyCheck(nombreInput, nombre)) {return;}
+        if (!sameName(nombreInput, nombre)) {return;}
         if (!emptyCheck(rfcInput, rfc)) {return;}
         if (!emptyCheck(giroInput, giro)) {return;}
         if (!emptyCheck(correoInput, correo)) {return;}
@@ -195,6 +196,27 @@ public class AddEmpresaForm extends javax.swing.JPanel {
             input.requestFocus();
             return false;
         } else {
+            nombre.setForeground(new Color (222,213,200));
+            return true;
+        }
+    }
+    
+    private boolean sameName(JTextField input, JLabel nombre) {
+        String campo = input.getText();
+        boolean encontrado = false;
+        
+        for (EmpresaObject e : ventanaPrincipal.funcionesEmpresa.getEmpresas()) {
+            if (e.getNombre().equals(campo)) {
+                encontrado = true;
+            }
+         }
+        
+        if (encontrado) {
+            nombre.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null, "El nombre "+ campo + " ya esta en uso, porfavor renombre");
+            input.requestFocus();
+            return false;
+        }else {
             nombre.setForeground(new Color (222,213,200));
             return true;
         }

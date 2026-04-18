@@ -5,11 +5,11 @@ Jpanel\AddEmpresaForm.class
 App\loginForm$1.class
 Jpanel\AddEmpresaForm$1.class
 Jpanel\EmpresaForm$2.class
-function\CuentaObject.class
 App\MainForm$3.class
 App\loginForm$3.class
 Jpanel\AddCatalogo$1.class
 Jpanel\Catalogo$1.class
+function\CatalogoObject.class
 App\loginForm.class
 App\loginForm$2.class
 Jpanel\EmpresaForm$1.class
@@ -21,6 +21,7 @@ App\loginForm$4.class
 App\MainForm.class
 function\CatalogoFunctions.class
 function\EmpresaFunctions.class
+Jpanel\AddCatalogo$2.class
 Jpanel\AddEmpresaForm$2.class
 App\MainForm$4.class
 Jpanel\Catalogo.class

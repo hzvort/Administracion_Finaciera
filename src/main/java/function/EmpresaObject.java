@@ -21,4 +21,8 @@ public class EmpresaObject {
     public String getGiro() {return giro;}
     public String getCorreo() {return correo;}
     
+    public CatalogoFunctions getMiCatalogo() {
+        return miCatalogo;
+    }
+    
 }

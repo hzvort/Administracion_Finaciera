@@ -2,6 +2,11 @@
 package Jpanel;
 
 import App.MainForm;
+import function.CatalogoObject;
+import java.awt.Color;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 public class AddCatalogo extends javax.swing.JPanel {
     
@@ -155,6 +160,11 @@ public class AddCatalogo extends javax.swing.JPanel {
         acceptBtn.setText("Aceptar");
         acceptBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         acceptBtn.setOpaque(true);
+        acceptBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                acceptBtnMousePressed(evt);
+            }
+        });
         add(acceptBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 390, 110, 50));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -162,7 +172,66 @@ public class AddCatalogo extends javax.swing.JPanel {
         ventanaPrincipal.MostrarCatalogoForm();
     }//GEN-LAST:event_cancelarBtnMousePressed
 
+    private void acceptBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_acceptBtnMousePressed
+        if (!emptyCheck(codigoInput, codigo)) { return;}
+        if (!emptyCheck(cuentaInput, cuenta)) { return;}
+        if (!doubleCheck(cantidadInput, cantidad)) { return;}
+        
+        CatalogoObject nuevaCuenta = new CatalogoObject(
+                codigoInput.getText(),
+                cuentaInput.getText(),
+                tipoCombo.getSelectedItem().toString(),
+                naturalezaInput.getSelectedItem().toString(),
+                Double.parseDouble(cantidadInput.getText())
+        );
+        
+    }//GEN-LAST:event_acceptBtnMousePressed
 
+    private boolean doubleCheck(JTextField input, JLabel nombre) {
+        String texto = input.getText().trim();
+        if (texto.isEmpty()) {
+            nombre.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null, "Porfavor rellene el "+ nombre.getText());
+            input.requestFocus();
+            return false;
+        }
+        try {
+            double campo = Double.parseDouble(texto);
+                if (campo < 0) {
+                    nombre.setForeground(Color.red);
+                    JOptionPane.showMessageDialog(null, "El campo no puede ser negativo: " + nombre.getText());
+                    input.requestFocus();
+                    return false; 
+                } else {
+                    System.out.println("Funciono");
+                    nombre.setForeground(new Color(222, 213, 200));
+                    return true;
+                }
+        } catch (NumberFormatException e) {
+            System.out.println("no texto");
+                nombre.setForeground(Color.red);
+                JOptionPane.showMessageDialog(null, "Por favor ingrese una cantidad numérica válida en: " + nombre.getText());
+                input.requestFocus();
+                return false;
+            }
+        
+    }
+    
+    
+    private boolean emptyCheck(JTextField input, JLabel nombre) {
+        String campo = input.getText();
+        if (campo.isEmpty()) {
+            nombre.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null, "Porfavor rellene el "+ nombre.getText());
+            input.requestFocus();
+            return false;
+        } else {
+            nombre.setForeground(new Color (222,213,200));
+            return true;
+        }
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel acceptBtn;
     private javax.swing.JLabel cancelarBtn;

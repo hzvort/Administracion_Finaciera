@@ -3,6 +3,7 @@ package Jpanel;
 
 import App.MainForm;
 import function.EmpresaObject;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
@@ -119,6 +120,8 @@ public class Catalogo extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void crearBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearBtnMousePressed
+        String TextoComboBox = comboEmpresa.getSelectedItem().toString();
+        if (TextoComboBox.equals("Sin Empresas")) {JOptionPane.showMessageDialog(null, "Porfavor cree una empresa antes"); return;}
         AddCatalogo ac = new AddCatalogo(ventanaPrincipal);
         ventanaPrincipal.showPanel(ac);
     }//GEN-LAST:event_crearBtnMousePressed
