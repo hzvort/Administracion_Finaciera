@@ -2,6 +2,7 @@ package Jpanel;
 
 
 import App.MainForm;
+import function.CatalogoObject;
 import function.EmpresaObject;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -21,12 +22,31 @@ public class Catalogo extends javax.swing.JPanel {
         jTable1.getTableHeader().setBackground(new java.awt.Color(83,100,82));
         jTable1.getTableHeader().setForeground(new java.awt.Color(221,213,201));
         configurarTabla();
+        llenarTabla();
     }
     
     private void configurarTabla() {
         String[] columnas = {"Codigo", "Nombre de la cuenta", "Tipo de cuenta", "Naturaleza", "cantidad"};
         modelo = new DefaultTableModel(columnas, 0);
         jTable1.setModel(modelo);
+    }
+    
+    public void llenarTabla() {
+        modelo.setRowCount(0);
+        if (comboEmpresa.getItemCount() == 0 || comboEmpresa.getSelectedItem().toString().equals("Sin Empresas")) { return; }
+        int index = comboEmpresa.getSelectedIndex();
+        EmpresaObject empresaActual = ventanaPrincipal.funcionesEmpresa.getEmpresas().get(index);
+        
+        for (CatalogoObject cuenta : empresaActual.getMiCatalogo().getMiCatalogo()) {
+        Object[] fila = {
+            cuenta.getCodigo(),
+            cuenta.getNombre(),
+            cuenta.getTipo(),
+            cuenta.getNaturaleza(),
+            cuenta.getCantidad()
+        };
+        modelo.addRow(fila);
+        }
     }
     
     public void llenarCombo() {
@@ -86,6 +106,11 @@ public class Catalogo extends javax.swing.JPanel {
         eliminarBtn.setText("Eliminar");
         eliminarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         eliminarBtn.setOpaque(true);
+        eliminarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                eliminarBtnMousePressed(evt);
+            }
+        });
         add(eliminarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, 110, 50));
 
         BuscarBtn.setBackground(new java.awt.Color(83, 100, 82));
@@ -116,15 +141,35 @@ public class Catalogo extends javax.swing.JPanel {
         comboEmpresa.setForeground(new java.awt.Color(222, 213, 200));
         comboEmpresa.setBorder(null);
         comboEmpresa.setOpaque(true);
+        comboEmpresa.addActionListener(this::comboEmpresaActionPerformed);
         add(comboEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 570, 50));
     }// </editor-fold>//GEN-END:initComponents
 
     private void crearBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearBtnMousePressed
         String TextoComboBox = comboEmpresa.getSelectedItem().toString();
         if (TextoComboBox.equals("Sin Empresas")) {JOptionPane.showMessageDialog(null, "Porfavor cree una empresa antes"); return;}
-        AddCatalogo ac = new AddCatalogo(ventanaPrincipal);
+        int indexSeleccionado = comboEmpresa.getSelectedIndex();
+        EmpresaObject miEmpresa = ventanaPrincipal.funcionesEmpresa.getEmpresas().get(indexSeleccionado);
+        AddCatalogo ac = new AddCatalogo(ventanaPrincipal, miEmpresa);
         ventanaPrincipal.showPanel(ac);
     }//GEN-LAST:event_crearBtnMousePressed
+
+    private void eliminarBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarBtnMousePressed
+         int fila = jTable1.getSelectedRow();
+         int indexEmpresa = comboEmpresa.getSelectedIndex();
+        EmpresaObject empresaActual = ventanaPrincipal.funcionesEmpresa.getEmpresas().get(indexEmpresa);
+            if (fila != -1) {
+            empresaActual.getMiCatalogo().eliminarCatalogo(fila);
+            llenarTabla();
+            JOptionPane.showMessageDialog(this, "Cuenta Eliminada");
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, selecciona una fila primero");
+        }
+    }//GEN-LAST:event_eliminarBtnMousePressed
+
+    private void comboEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboEmpresaActionPerformed
+        llenarTabla();
+    }//GEN-LAST:event_comboEmpresaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

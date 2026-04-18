@@ -130,7 +130,7 @@ public class EmpresaForm extends javax.swing.JPanel {
 
     private void eliminarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarBtnMouseClicked
          int fila = jTable1.getSelectedRow();
-        if (fila != -1) {
+            if (fila != -1) {
             // 1. Lo borramos de la lista lógica
             ventanaPrincipal.funcionesEmpresa.eliminarEmpresa(fila);
             llenarTabla();

@@ -188,6 +188,7 @@ public class MainForm extends javax.swing.JFrame {
         empresaBtn.setBackground(new java.awt.Color(221, 213, 201));
         showPanel(this.cat);
         cat.llenarCombo();
+        cat.llenarTabla();
     }
     
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked

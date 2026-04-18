@@ -3,6 +3,7 @@ package Jpanel;
 
 import App.MainForm;
 import function.CatalogoObject;
+import function.EmpresaObject;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -11,9 +12,11 @@ import javax.swing.JTextField;
 public class AddCatalogo extends javax.swing.JPanel {
     
         private MainForm ventanaPrincipal;
+        private EmpresaObject empresaSeleccionada;
     
-    public AddCatalogo(MainForm ventanaPrincipal) {
+    public AddCatalogo(MainForm ventanaPrincipal, EmpresaObject empresaSeleccionada) {
         this.ventanaPrincipal = ventanaPrincipal;
+        this.empresaSeleccionada = empresaSeleccionada;
         ventanaPrincipal.flatStile();
         initComponents();
     }
@@ -184,6 +187,10 @@ public class AddCatalogo extends javax.swing.JPanel {
                 naturalezaInput.getSelectedItem().toString(),
                 Double.parseDouble(cantidadInput.getText())
         );
+        
+        empresaSeleccionada.getMiCatalogo().agregarCatalogo(nuevaCuenta);
+        JOptionPane.showMessageDialog(null, "Cuenta registrada exitosamente");
+        ventanaPrincipal.MostrarCatalogoForm();
         
     }//GEN-LAST:event_acceptBtnMousePressed
 
