@@ -10,7 +10,6 @@ import javax.swing.table.DefaultTableModel;
 public class EmpresaForm extends javax.swing.JPanel {
     private MainForm ventanaPrincipal;
     DefaultTableModel modelo;        
-    Catalogo cat;
     
     public EmpresaForm(MainForm ventanaPrincipal) {
         this.ventanaPrincipal = ventanaPrincipal;
@@ -124,7 +123,7 @@ public class EmpresaForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void crearBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearBtnMouseClicked
-       AddEmpresaForm aef = new AddEmpresaForm(ventanaPrincipal, cat);
+       AddEmpresaForm aef = new AddEmpresaForm(ventanaPrincipal, ventanaPrincipal.cat);
        ventanaPrincipal.showPanel(aef);
     }//GEN-LAST:event_crearBtnMouseClicked
 

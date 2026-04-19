@@ -14,7 +14,7 @@ public class MainForm extends javax.swing.JFrame {
     
     int xmouse, ymouse;
     EmpresaForm ef;
-    Catalogo cat;
+    public Catalogo cat;
     
     public EmpresaFunctions funcionesEmpresa = new EmpresaFunctions();
     

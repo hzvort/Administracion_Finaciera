@@ -1,4 +1,3 @@
-
 package Jpanel;
 
 import App.MainForm;
@@ -210,12 +209,10 @@ public class AddCatalogo extends javax.swing.JPanel {
                     input.requestFocus();
                     return false; 
                 } else {
-                    System.out.println("Funciono");
                     nombre.setForeground(new Color(222, 213, 200));
                     return true;
                 }
         } catch (NumberFormatException e) {
-            System.out.println("no texto");
                 nombre.setForeground(Color.red);
                 JOptionPane.showMessageDialog(null, "Por favor ingrese una cantidad numérica válida en: " + nombre.getText());
                 input.requestFocus();
