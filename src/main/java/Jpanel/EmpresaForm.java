@@ -124,7 +124,7 @@ public class EmpresaForm extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void crearBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearBtnMouseClicked
-       AddEmpresaForm aef = new AddEmpresaForm(ventanaPrincipal);
+       AddEmpresaForm aef = new AddEmpresaForm(ventanaPrincipal, cat);
        ventanaPrincipal.showPanel(aef);
     }//GEN-LAST:event_crearBtnMouseClicked
 

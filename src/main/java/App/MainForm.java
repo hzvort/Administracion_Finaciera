@@ -37,7 +37,7 @@ public class MainForm extends javax.swing.JFrame {
         initComponents();
         ef = new EmpresaForm(this);
         cat = new Catalogo(this);
-        
+        cat.llenarCombo();
         ef.llenarTabla();
         this.setLocationRelativeTo(null);
         showPanel(ef);
@@ -187,7 +187,6 @@ public class MainForm extends javax.swing.JFrame {
         catalogoBtn.setBackground(new java.awt.Color(192,213,184));
         empresaBtn.setBackground(new java.awt.Color(221, 213, 201));
         showPanel(this.cat);
-        cat.llenarCombo();
         cat.llenarTabla();
     }
     
