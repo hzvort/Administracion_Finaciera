@@ -49,7 +49,7 @@ public class Catalogo extends javax.swing.JPanel {
         }
     }
     
-    public void llenarCombo() {
+    public  void llenarCombo() {
             comboEmpresa.removeAllItems();
              if (ventanaPrincipal.funcionesEmpresa.empty()) {comboEmpresa.addItem("Sin Empresas"); return;}
         for (EmpresaObject e: ventanaPrincipal.funcionesEmpresa.getEmpresas()) {

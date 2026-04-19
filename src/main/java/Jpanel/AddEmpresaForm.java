@@ -2,6 +2,7 @@
 package Jpanel;
 
 import App.MainForm;
+import Utils.ValidacionesUtils;
 import function.EmpresaObject;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -160,11 +161,11 @@ public class AddEmpresaForm extends javax.swing.JPanel {
     }//GEN-LAST:event_cancelBtnMouseClicked
 
     private void acceptBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_acceptBtnMousePressed
-        if (!emptyCheck(nombreInput, nombre)) {return;}
+        if (!ValidacionesUtils.emptyCheck(nombreInput, nombre)) {return;}
         if (!sameName(nombreInput, nombre)) {return;}
-        if (!emptyCheck(rfcInput, rfc)) {return;}
-        if (!emptyCheck(giroInput, giro)) {return;}
-        if (!emptyCheck(correoInput, correo)) {return;}
+        if (!ValidacionesUtils.emptyCheck(rfcInput, rfc)) {return;}
+        if (!ValidacionesUtils.emptyCheck(giroInput, giro)) {return;}
+        if (!ValidacionesUtils.emptyCheck(correoInput, correo)) {return;}
         
         EmpresaObject nueva = new EmpresaObject(
             nombreInput.getText(),
@@ -185,19 +186,6 @@ public class AddEmpresaForm extends javax.swing.JPanel {
         correoInput.setText("");
         
     }//GEN-LAST:event_acceptBtnMousePressed
-    
-    private boolean emptyCheck(JTextField input, JLabel nombre) {
-        String campo = input.getText();
-        if (campo.isEmpty()) {
-            nombre.setForeground(Color.red);
-            JOptionPane.showMessageDialog(null, "Porfavor rellene el "+ nombre.getText());
-            input.requestFocus();
-            return false;
-        } else {
-            nombre.setForeground(new Color (222,213,200));
-            return true;
-        }
-    }
     
     private boolean sameName(JTextField input, JLabel nombre) {
         String campo = input.getText();

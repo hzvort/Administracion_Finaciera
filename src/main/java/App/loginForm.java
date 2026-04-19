@@ -1,13 +1,10 @@
 package App;
 
-import java.awt.Dialog;
-import java.util.Locale;
 import javax.swing.JOptionPane;
 
 public class loginForm extends javax.swing.JFrame {
     
     int xmouse, ymouse;
-    MainForm ventanaMain = new MainForm();
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(loginForm.class.getName());
 
@@ -137,7 +134,6 @@ public class loginForm extends javax.swing.JFrame {
         userInput.setToolTipText("");
         userInput.setBorder(null);
         userInput.setOpaque(true);
-        userInput.addActionListener(this::userInputActionPerformed);
         bgPanel.add(userInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 290, 50));
 
         loginBtn.setBackground(new java.awt.Color(83, 100, 82));
@@ -184,10 +180,6 @@ public class loginForm extends javax.swing.JFrame {
        this.setLocation(x - xmouse, y - ymouse);
     }//GEN-LAST:event_DragMouseDragged
 
-    private void userInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userInputActionPerformed
-
     private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseClicked
        
         String user = userInput.getText();
@@ -195,7 +187,7 @@ public class loginForm extends javax.swing.JFrame {
         
         if (!user.equals("admin")) {JOptionPane.showMessageDialog(null, "Error: Porfavor revise su usuario y contraseña"); return;}
         if (!pass.equals("admin")) {JOptionPane.showMessageDialog(null, "Error: Porfavor revise su usuario y contraseña"); return;}
-        
+        MainForm ventanaMain = new MainForm();
         ventanaMain.setVisible(true);
         this.setVisible(false);
         JOptionPane.showMessageDialog(null, "Bienvenido :P");

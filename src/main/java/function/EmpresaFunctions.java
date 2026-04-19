@@ -23,8 +23,7 @@ public class EmpresaFunctions {
         return empresa;
     }
     
-    public boolean empty() {
-        if (empresa.isEmpty()) {return true;} else {return false;}
-    }
+     //YA TE DICE SI ES TRUE O FALSE NO HAY QUE PONER EL IF TAL RETURN FALSE O TRUE
+    public boolean empty() { return empresa.isEmpty();}
     
 }

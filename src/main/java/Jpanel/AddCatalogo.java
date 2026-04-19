@@ -1,6 +1,7 @@
 package Jpanel;
 
 import App.MainForm;
+import Utils.ValidacionesUtils;
 import function.CatalogoObject;
 import function.EmpresaObject;
 import java.awt.Color;
@@ -175,8 +176,8 @@ public class AddCatalogo extends javax.swing.JPanel {
     }//GEN-LAST:event_cancelarBtnMousePressed
 
     private void acceptBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_acceptBtnMousePressed
-        if (!emptyCheck(codigoInput, codigo)) { return;}
-        if (!emptyCheck(cuentaInput, cuenta)) { return;}
+        if (!ValidacionesUtils.emptyCheck(codigoInput, codigo)) { return;}
+        if (!ValidacionesUtils.emptyCheck(cuentaInput, cuenta)) { return;}
         if (!doubleCheck(cantidadInput, cantidad)) { return;}
         
         CatalogoObject nuevaCuenta = new CatalogoObject(
@@ -220,21 +221,6 @@ public class AddCatalogo extends javax.swing.JPanel {
             }
         
     }
-    
-    
-    private boolean emptyCheck(JTextField input, JLabel nombre) {
-        String campo = input.getText();
-        if (campo.isEmpty()) {
-            nombre.setForeground(Color.red);
-            JOptionPane.showMessageDialog(null, "Porfavor rellene el "+ nombre.getText());
-            input.requestFocus();
-            return false;
-        } else {
-            nombre.setForeground(new Color (222,213,200));
-            return true;
-        }
-    }
-    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel acceptBtn;
