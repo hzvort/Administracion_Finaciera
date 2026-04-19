@@ -144,8 +144,8 @@ public class loginForm extends javax.swing.JFrame {
         loginBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         loginBtn.setOpaque(true);
         loginBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                loginBtnMouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                loginBtnMousePressed(evt);
             }
         });
         bgPanel.add(loginBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 400, 130, 40));
@@ -180,8 +180,7 @@ public class loginForm extends javax.swing.JFrame {
        this.setLocation(x - xmouse, y - ymouse);
     }//GEN-LAST:event_DragMouseDragged
 
-    private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseClicked
-       
+    private void loginBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMousePressed
         String user = userInput.getText();
         String pass = String.valueOf(pasInput.getPassword());
         
@@ -191,8 +190,7 @@ public class loginForm extends javax.swing.JFrame {
         ventanaMain.setVisible(true);
         this.setVisible(false);
         JOptionPane.showMessageDialog(null, "Bienvenido :P");
-        
-    }//GEN-LAST:event_loginBtnMouseClicked
+    }//GEN-LAST:event_loginBtnMousePressed
 
 
     public static void main(String args[]) {

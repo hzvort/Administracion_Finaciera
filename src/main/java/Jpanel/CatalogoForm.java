@@ -8,13 +8,13 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
-public class Catalogo extends javax.swing.JPanel {
+public class CatalogoForm extends javax.swing.JPanel {
             
         private MainForm ventanaPrincipal;
         DefaultTableModel modelo;
-        EmpresaObject empresaObject;
+        public static EmpresaObject miEmpresa;
     
-    public Catalogo(MainForm ventanaPrincipal) {
+    public CatalogoForm(MainForm ventanaPrincipal) {
         this.ventanaPrincipal = ventanaPrincipal;
         ventanaPrincipal.flatStile();
         UIManager.put( "ComboBox.buttonBackground", new java.awt.Color(83,100,82) );
@@ -149,9 +149,9 @@ public class Catalogo extends javax.swing.JPanel {
         String TextoComboBox = comboEmpresa.getSelectedItem().toString();
         if (TextoComboBox.equals("Sin Empresas")) {JOptionPane.showMessageDialog(null, "Porfavor cree una empresa antes"); return;}
         int indexSeleccionado = comboEmpresa.getSelectedIndex();
-        EmpresaObject miEmpresa = ventanaPrincipal.funcionesEmpresa.getEmpresas().get(indexSeleccionado);
-        AddCatalogo ac = new AddCatalogo(ventanaPrincipal, miEmpresa);
-        ventanaPrincipal.showPanel(ac);
+        miEmpresa = ventanaPrincipal.funcionesEmpresa.getEmpresas().get(indexSeleccionado);
+        ventanaPrincipal.addCat.setEmpresa(miEmpresa);
+        ventanaPrincipal.MostrarAddCatalogo();
     }//GEN-LAST:event_crearBtnMousePressed
 
     private void eliminarBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarBtnMousePressed

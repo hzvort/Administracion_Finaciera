@@ -1,12 +1,13 @@
 
 package App;
 
-import Jpanel.Catalogo;
+import Jpanel.AddCatalogo;
+import Jpanel.AddEmpresaForm;
+import Jpanel.CatalogoForm;
 import Jpanel.EmpresaForm;
 import com.formdev.flatlaf.FlatLightLaf;
 import function.EmpresaFunctions;
-import java.awt.BorderLayout;
-import javax.swing.JPanel;
+import java.awt.CardLayout;
 import javax.swing.UIManager;
 
 
@@ -14,11 +15,36 @@ public class MainForm extends javax.swing.JFrame {
     
     int xmouse, ymouse;
     EmpresaForm ef;
-    public Catalogo cat;
+    public AddEmpresaForm addEf;
+    public AddCatalogo addCat;
+    CatalogoForm cat;
+    public CardLayout cardLayout;
     
     public EmpresaFunctions funcionesEmpresa = new EmpresaFunctions();
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainForm.class.getName());
+
+    public MainForm() {
+        initComponents();
+        cardLayout = new CardLayout();
+        content.setLayout(cardLayout);
+        
+        ef = new EmpresaForm(this);
+        cat = new CatalogoForm(this);
+        
+        addEf = new AddEmpresaForm(this, cat);
+        addCat = new AddCatalogo(this);
+        
+        content.add(ef, "PanelEmpresa"); 
+        content.add(cat, "PanelCatalogo");
+        content.add(addEf, "PanelAddEmpresa");
+        content.add(addCat, "PanelAddCatalogo");
+        
+        cat.llenarCombo();
+        ef.llenarTabla();
+        this.setLocationRelativeTo(null);
+        cardLayout.show(content, "PanelEmpresa");
+    }
     
     public void flatStile() {
      try {
@@ -31,17 +57,6 @@ public class MainForm extends javax.swing.JFrame {
         UIManager.put( "ComboBox.selectionBackground", new java.awt.Color(209,213,194) );
         UIManager.put( "ComboBox.foreground", new java.awt.Color(83,100,82) );
         UIManager.put( "ComboBox.buttonArrowColor", new java.awt.Color(222,213,200) );
-    }
-
-    public MainForm() {
-        initComponents();
-        ef = new EmpresaForm(this);
-        cat = new Catalogo(this);
-        cat.llenarCombo();
-        ef.llenarTabla();
-        this.setLocationRelativeTo(null);
-        showPanel(ef);
-        
     }
 
     @SuppressWarnings("unchecked")
@@ -140,17 +155,7 @@ public class MainForm extends javax.swing.JFrame {
 
         bgPanel.add(leftPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 500));
 
-        javax.swing.GroupLayout contentLayout = new javax.swing.GroupLayout(content);
-        content.setLayout(contentLayout);
-        contentLayout.setHorizontalGroup(
-            contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
-        );
-        contentLayout.setVerticalGroup(
-            contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 460, Short.MAX_VALUE)
-        );
-
+        content.setLayout(new java.awt.CardLayout());
         bgPanel.add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 590, 460));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -167,28 +172,23 @@ public class MainForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void showPanel(JPanel p) {
-        p.setSize(590, 460);
-        p.setLocation(0, 0);
-        content.removeAll();
-        content.add(p, BorderLayout.CENTER);
-        content.revalidate();
-        content.repaint();
-    }
     
     public void mostrarEmpresaForm() {
         empresaBtn.setBackground(new java.awt.Color(192,213,184));
         catalogoBtn.setBackground(new java.awt.Color(221, 213, 201));
         ef.llenarTabla();
-        showPanel(this.ef);
+        cardLayout.show(content, "PanelEmpresa");
     }
     
     public void MostrarCatalogoForm() {
         catalogoBtn.setBackground(new java.awt.Color(192,213,184));
         empresaBtn.setBackground(new java.awt.Color(221, 213, 201));
-        showPanel(this.cat);
         cat.llenarTabla();
+        cardLayout.show(content, "PanelCatalogo");
     }
+    
+    public void MostrarAddEmpresa() {cardLayout.show(content, "PanelAddEmpresa");}
+    public void MostrarAddCatalogo() {cardLayout.show(content, "PanelAddCatalogo");}
     
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
         System.exit(0);
@@ -242,7 +242,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JPanel bgPanel;
     private javax.swing.JLabel catalogoBtn;
     private javax.swing.JLabel close;
-    private javax.swing.JPanel content;
+    public javax.swing.JPanel content;
     private javax.swing.JLabel empresaBtn;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel leftPanel;

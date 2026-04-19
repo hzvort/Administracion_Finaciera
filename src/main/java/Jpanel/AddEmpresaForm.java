@@ -12,10 +12,10 @@ import javax.swing.JTextField;
 public class AddEmpresaForm extends javax.swing.JPanel {
 
     private MainForm ventanaPrincipal;
-    private Catalogo cat;
+    private CatalogoForm cat;
     
     
-    public AddEmpresaForm(MainForm ventanaPrincipal, Catalogo cat) {
+    public AddEmpresaForm(MainForm ventanaPrincipal, CatalogoForm cat) {
         this.ventanaPrincipal = ventanaPrincipal;
         this.cat = cat;
         initComponents();
@@ -158,6 +158,7 @@ public class AddEmpresaForm extends javax.swing.JPanel {
 
     private void cancelBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelBtnMouseClicked
         ventanaPrincipal.mostrarEmpresaForm();
+        limpiarCampos();
     }//GEN-LAST:event_cancelBtnMouseClicked
 
     private void acceptBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_acceptBtnMousePressed
@@ -179,13 +180,15 @@ public class AddEmpresaForm extends javax.swing.JPanel {
         cat.llenarCombo();
         ventanaPrincipal.mostrarEmpresaForm();
         
-        
+        limpiarCampos();
+    }//GEN-LAST:event_acceptBtnMousePressed
+    
+    private void limpiarCampos() {
         nombreInput.setText("");
         rfcInput.setText("");
         giroInput.setText("");
         correoInput.setText("");
-        
-    }//GEN-LAST:event_acceptBtnMousePressed
+    }
     
     private boolean sameName(JTextField input, JLabel nombre) {
         String campo = input.getText();

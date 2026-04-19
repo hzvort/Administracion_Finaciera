@@ -14,11 +14,14 @@ public class AddCatalogo extends javax.swing.JPanel {
         private MainForm ventanaPrincipal;
         private EmpresaObject empresaSeleccionada;
     
-    public AddCatalogo(MainForm ventanaPrincipal, EmpresaObject empresaSeleccionada) {
+    public AddCatalogo(MainForm ventanaPrincipal) {
         this.ventanaPrincipal = ventanaPrincipal;
-        this.empresaSeleccionada = empresaSeleccionada;
         ventanaPrincipal.flatStile();
         initComponents();
+    }
+    
+    public void setEmpresa(EmpresaObject empresa) {
+        this.empresaSeleccionada = empresa;
     }
 
 
@@ -173,6 +176,7 @@ public class AddCatalogo extends javax.swing.JPanel {
 
     private void cancelarBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBtnMousePressed
         ventanaPrincipal.MostrarCatalogoForm();
+        limpiarCampos();
     }//GEN-LAST:event_cancelarBtnMousePressed
 
     private void acceptBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_acceptBtnMousePressed
@@ -192,8 +196,15 @@ public class AddCatalogo extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Cuenta registrada exitosamente");
         ventanaPrincipal.MostrarCatalogoForm();
         
+        limpiarCampos();
     }//GEN-LAST:event_acceptBtnMousePressed
 
+    private void limpiarCampos() {
+        codigoInput.setText("");
+        cuentaInput.setText("");
+        cantidadInput.setText("");
+    }
+    
     private boolean doubleCheck(JTextField input, JLabel nombre) {
         String texto = input.getText().trim();
         if (texto.isEmpty()) {
