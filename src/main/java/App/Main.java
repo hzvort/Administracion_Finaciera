@@ -9,13 +9,15 @@ import Reportes.BalanceGeneral;
 import com.formdev.flatlaf.FlatLightLaf;
 import function.EmpresaFunctions;
 import java.awt.CardLayout;
+import java.util.List;
+import javax.swing.JLabel;
 import javax.swing.UIManager;
 
 
 public class Main extends javax.swing.JFrame {
     
     int xmouse, ymouse;
-    public CardLayout cardLayout;
+    CardLayout cardLayout;
     
     //variables Gestion
     Empresa ef;
@@ -25,7 +27,6 @@ public class Main extends javax.swing.JFrame {
     
     //variables Reportes
     BalanceGeneral bg;
-    
     
     public EmpresaFunctions funcionesEmpresa = new EmpresaFunctions();
     
@@ -138,7 +139,7 @@ public class Main extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(221, 213, 201));
         leftPanel.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 170, 10));
 
-        empresaBtn.setBackground(new java.awt.Color(192, 213, 184));
+        empresaBtn.setBackground(new java.awt.Color(221, 213, 201));
         empresaBtn.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         empresaBtn.setForeground(new java.awt.Color(83, 100, 82));
         empresaBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -152,7 +153,7 @@ public class Main extends javax.swing.JFrame {
         });
         leftPanel.add(empresaBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 210, 40));
 
-        balanceBtn.setBackground(new java.awt.Color(221, 213, 201));
+        balanceBtn.setBackground(new java.awt.Color(192, 213, 184));
         balanceBtn.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         balanceBtn.setForeground(new java.awt.Color(83, 100, 82));
         balanceBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -166,7 +167,7 @@ public class Main extends javax.swing.JFrame {
         });
         leftPanel.add(balanceBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 210, 40));
 
-        catalogoBtn.setBackground(new java.awt.Color(221, 213, 201));
+        catalogoBtn.setBackground(new java.awt.Color(192, 213, 184));
         catalogoBtn.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         catalogoBtn.setForeground(new java.awt.Color(83, 100, 82));
         catalogoBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -201,17 +202,13 @@ public class Main extends javax.swing.JFrame {
 
     
     public void mostrarEmpresaForm() {
-        empresaBtn.setBackground(new java.awt.Color(192,213,184));
-        catalogoBtn.setBackground(new java.awt.Color(221, 213, 201));
-        balanceBtn.setBackground(new java.awt.Color(221, 213, 201));
+        actualizarBotones(empresaBtn);
         ef.llenarTabla();
         cardLayout.show(content, "PanelEmpresa");
     }
     
     public void MostrarCatalogoForm() {
-        catalogoBtn.setBackground(new java.awt.Color(192,213,184));
-        empresaBtn.setBackground(new java.awt.Color(221, 213, 201));
-        balanceBtn.setBackground(new java.awt.Color(221, 213, 201));
+        actualizarBotones(catalogoBtn);
         cat.llenarTabla();
         cardLayout.show(content, "PanelCatalogo");
     }
@@ -220,11 +217,20 @@ public class Main extends javax.swing.JFrame {
     public void MostrarAddCatalogo() {cardLayout.show(content, "PanelAddCatalogo");}
     
     public void MostrarBalanceGeneral() {
-        catalogoBtn.setBackground(new java.awt.Color(221, 213, 201));
-        empresaBtn.setBackground(new java.awt.Color(221, 213, 201));
-        balanceBtn.setBackground(new java.awt.Color(192,213,184));
+        actualizarBotones(balanceBtn);
         cat.llenarTabla();
         cardLayout.show(content, "PanelBalanceGeneral");
+    }
+    
+    private void actualizarBotones(JLabel botonSeleccionado) {
+        List<JLabel> botones = List.of(catalogoBtn, empresaBtn, balanceBtn);
+        for (JLabel btn : botones) {
+            if (btn == botonSeleccionado) {
+                btn.setBackground(new java.awt.Color(221, 213, 201));
+            } else {
+                btn.setBackground(new java.awt.Color(192,213,184));
+            }
+        }
     }
     
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked

@@ -132,7 +132,7 @@
             <Component class="javax.swing.JLabel" name="empresaBtn">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="b8" green="d5" red="c0" type="rgb"/>
+                  <Color blue="c9" green="d5" red="dd" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Verdana" size="14" style="1"/>
@@ -159,7 +159,7 @@
             <Component class="javax.swing.JLabel" name="balanceBtn">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="c9" green="d5" red="dd" type="rgb"/>
+                  <Color blue="b8" green="d5" red="c0" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Verdana" size="14" style="1"/>
@@ -186,7 +186,7 @@
             <Component class="javax.swing.JLabel" name="catalogoBtn">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="c9" green="d5" red="dd" type="rgb"/>
+                  <Color blue="b8" green="d5" red="c0" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Verdana" size="14" style="1"/>

@@ -15,6 +15,7 @@ Gestion\AddCatalogo.class
 App\Main.class
 function\CatalogoObject.class
 App\Login.class
+Utils\AspectoUtils.class
 App\Login$2.class
 App\Main$2.class
 App\Login$4.class
@@ -22,6 +23,7 @@ Gestion\Catalogo$1.class
 Gestion\Empresa$2.class
 Gestion\AddEmpresa$2.class
 Gestion\Empresa.class
+Gestion\Catalogo$3.class
 App\Login$1.class
 App\Main$4.class
 function\CatalogoFunctions.class

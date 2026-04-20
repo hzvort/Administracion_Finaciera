@@ -2,6 +2,7 @@ package Gestion;
 
 
 import App.Main;
+import Utils.AspectoUtils;
 import function.CatalogoObject;
 import function.EmpresaObject;
 import javax.swing.JOptionPane;
@@ -19,8 +20,7 @@ public class Catalogo extends javax.swing.JPanel {
         ventanaPrincipal.flatStile();
         UIManager.put( "ComboBox.buttonBackground", new java.awt.Color(83,100,82) );
         initComponents();
-        jTable1.getTableHeader().setBackground(new java.awt.Color(83,100,82));
-        jTable1.getTableHeader().setForeground(new java.awt.Color(221,213,201));
+        AspectoUtils.tableAspect(jTable1);
         configurarTabla();
         llenarTabla();
     }
@@ -120,6 +120,11 @@ public class Catalogo extends javax.swing.JPanel {
         BuscarBtn.setText("Buscar");
         BuscarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BuscarBtn.setOpaque(true);
+        BuscarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                BuscarBtnMousePressed(evt);
+            }
+        });
         add(BuscarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 110, 50));
 
         crearBtn.setBackground(new java.awt.Color(83, 100, 82));
@@ -166,6 +171,26 @@ public class Catalogo extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Por favor, selecciona una fila primero");
         }
     }//GEN-LAST:event_eliminarBtnMousePressed
+
+    private void BuscarBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BuscarBtnMousePressed
+       String codigoBuscado = buscarText.getText().trim();
+       boolean encontrado = false;
+       
+       if (codigoBuscado.isEmpty() || codigoBuscado.equals("...")) { JOptionPane.showMessageDialog(this, "Por favor, ingresa un codigo válido para buscar."); return; }
+       
+       for (int i = 0; i < jTable1.getRowCount(); i++) {
+            String codigoTabla = jTable1.getValueAt(i, 0).toString();
+
+            if (codigoTabla.equalsIgnoreCase(codigoBuscado)) {
+                jTable1.setRowSelectionInterval(i, i);
+                jTable1.scrollRectToVisible(jTable1.getCellRect(i, 0, true));
+                encontrado = true;
+                break;
+            }
+        }
+       
+       if (!encontrado) {JOptionPane.showMessageDialog(this, "No se encontró ninguna cuenta con el codigo: " + codigoBuscado);}
+    }//GEN-LAST:event_BuscarBtnMousePressed
 
     private void comboEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboEmpresaActionPerformed
         llenarTabla();

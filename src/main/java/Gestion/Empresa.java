@@ -2,6 +2,7 @@
 package Gestion;
 
 import App.Main;
+import Utils.AspectoUtils;
 import function.EmpresaObject;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -15,8 +16,7 @@ public class Empresa extends javax.swing.JPanel {
         this.ventanaPrincipal = ventanaPrincipal;
         ventanaPrincipal.flatStile();
         initComponents();
-        jTable1.getTableHeader().setBackground(new java.awt.Color(83,100,82));
-        jTable1.getTableHeader().setForeground(new java.awt.Color(221,213,201));
+        AspectoUtils.tableAspect(jTable1);
         configurarTabla();
         llenarTabla();
     }

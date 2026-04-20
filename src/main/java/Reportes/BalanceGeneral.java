@@ -1,7 +1,7 @@
 package Reportes;
 
 import App.Main;
-import javax.swing.JTable;
+import Utils.AspectoUtils;
 import javax.swing.UIManager;
 
 public class BalanceGeneral extends javax.swing.JPanel {
@@ -11,13 +11,10 @@ public class BalanceGeneral extends javax.swing.JPanel {
         initComponents();
         ventanaPrincipal.flatStile();
         UIManager.put( "ComboBox.buttonBackground", new java.awt.Color(83,100,82) );
-        tableAspect(activoTable); tableAspect(pasivoTable); tableAspect(capitalTable);
+        AspectoUtils.tableAspect(activoTable); AspectoUtils.tableAspect(pasivoTable); AspectoUtils.tableAspect(capitalTable);
     }
     
-    private void tableAspect(JTable tabla) {
-        tabla.getTableHeader().setBackground(new java.awt.Color(83,100,82));
-        tabla.getTableHeader().setForeground(new java.awt.Color(221,213,201));
-    }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -34,6 +31,9 @@ public class BalanceGeneral extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         activoTable = new javax.swing.JTable();
         cambioBtn = new javax.swing.JLabel();
+        pasivoLabel = new javax.swing.JLabel();
+        capitalLabel = new javax.swing.JLabel();
+        activoLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(221, 213, 201));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -91,7 +91,7 @@ public class BalanceGeneral extends javax.swing.JPanel {
         pasivoTable.setSelectionForeground(new java.awt.Color(83, 100, 82));
         jScrollPane1.setViewportView(pasivoTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 280, 100));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 270, 100));
 
         capitalTable.setBackground(new java.awt.Color(221, 213, 201));
         capitalTable.setForeground(new java.awt.Color(83, 100, 82));
@@ -108,7 +108,7 @@ public class BalanceGeneral extends javax.swing.JPanel {
         capitalTable.setSelectionForeground(new java.awt.Color(83, 100, 82));
         jScrollPane2.setViewportView(capitalTable);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 570, 130));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 570, 110));
 
         activoTable.setBackground(new java.awt.Color(221, 213, 201));
         activoTable.setForeground(new java.awt.Color(83, 100, 82));
@@ -125,7 +125,7 @@ public class BalanceGeneral extends javax.swing.JPanel {
         activoTable.setSelectionForeground(new java.awt.Color(83, 100, 82));
         jScrollPane3.setViewportView(activoTable);
 
-        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 260, 100));
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 270, 100));
 
         cambioBtn.setBackground(new java.awt.Color(83, 100, 82));
         cambioBtn.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
@@ -135,20 +135,38 @@ public class BalanceGeneral extends javax.swing.JPanel {
         cambioBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cambioBtn.setOpaque(true);
         add(cambioBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 240, 40));
+
+        pasivoLabel.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        pasivoLabel.setForeground(new java.awt.Color(83, 100, 82));
+        pasivoLabel.setText("Sin Pasivo");
+        add(pasivoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 120, -1, -1));
+
+        capitalLabel.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        capitalLabel.setForeground(new java.awt.Color(83, 100, 82));
+        capitalLabel.setText("Sin Capital");
+        add(capitalLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, -1, -1));
+
+        activoLabel.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        activoLabel.setForeground(new java.awt.Color(83, 100, 82));
+        activoLabel.setText("Sin Activo");
+        add(activoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Fecha;
+    private javax.swing.JLabel activoLabel;
     private javax.swing.JTable activoTable;
     private javax.swing.JLabel cambioBtn;
     private javax.swing.JTextField cambioInput;
+    private javax.swing.JLabel capitalLabel;
     private javax.swing.JTable capitalTable;
     public javax.swing.JComboBox<String> comboBalance;
     private javax.swing.JLabel generarBtn;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel pasivoLabel;
     private javax.swing.JTable pasivoTable;
     // End of variables declaration//GEN-END:variables
 }
