@@ -18,4 +18,10 @@ public class CatalogoObject {
    public String getNaturaleza() { return naturaleza; }
    public double getCantidad() { return cantidad; }
    
+   public void setCodigo(String codigo) { this.codigo = codigo; }
+   public void setNombre(String nombre) { this.nombre = nombre; }
+   public void setTipo(String tipo) { this.tipo = tipo; }
+   public void setNaturaleza(String naturaleza) { this.naturaleza = naturaleza; }
+   public void setCantidad(double cantidad) { this.cantidad = cantidad; }
+   
 }

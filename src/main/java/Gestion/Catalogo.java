@@ -5,6 +5,7 @@ import App.Main;
 import Utils.AspectoUtils;
 import FuncionesGestion.CatalogoObject;
 import FuncionesGestion.EmpresaObject;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
@@ -69,6 +70,7 @@ public class Catalogo extends javax.swing.JPanel {
         BuscarBtn = new javax.swing.JLabel();
         crearBtn = new javax.swing.JLabel();
         comboEmpresa = new javax.swing.JComboBox<>();
+        modificarBtn = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(221, 213, 201));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -148,11 +150,30 @@ public class Catalogo extends javax.swing.JPanel {
         comboEmpresa.setOpaque(true);
         comboEmpresa.addActionListener(this::comboEmpresaActionPerformed);
         add(comboEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 570, 50));
+
+        modificarBtn.setBackground(new java.awt.Color(83, 100, 82));
+        modificarBtn.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        modificarBtn.setForeground(new java.awt.Color(222, 213, 200));
+        modificarBtn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        modificarBtn.setText("Modificar");
+        modificarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        modificarBtn.setOpaque(true);
+        modificarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                modificarBtnMouseClicked(evt);
+            }
+        });
+        add(modificarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 390, 110, 50));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void crearBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearBtnMousePressed
+    private boolean tieneEmpresa () {
         String TextoComboBox = comboEmpresa.getSelectedItem().toString();
-        if (TextoComboBox.equals("Sin Empresas")) {JOptionPane.showMessageDialog(null, "Porfavor cree una empresa antes"); return;}
+        if (TextoComboBox.equals("Sin Empresas")) 
+        {JOptionPane.showMessageDialog(null, "Porfavor cree una empresa antes"); return false;} else {return true;}
+    }
+    
+    private void crearBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearBtnMousePressed
+        if (!tieneEmpresa()) {return;}
         int indexSeleccionado = comboEmpresa.getSelectedIndex();
         miEmpresa = ventanaPrincipal.funcionesEmpresa.getEmpresas().get(indexSeleccionado);
         ventanaPrincipal.addCat.setEmpresa(miEmpresa);
@@ -160,8 +181,9 @@ public class Catalogo extends javax.swing.JPanel {
     }//GEN-LAST:event_crearBtnMousePressed
 
     private void eliminarBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarBtnMousePressed
-         int fila = jTable1.getSelectedRow();
-         int indexEmpresa = comboEmpresa.getSelectedIndex();
+        if (!tieneEmpresa()) {return;} 
+        int fila = jTable1.getSelectedRow();
+        int indexEmpresa = comboEmpresa.getSelectedIndex();
         EmpresaObject empresaActual = ventanaPrincipal.funcionesEmpresa.getEmpresas().get(indexEmpresa);
             if (fila != -1) {
             empresaActual.getMiCatalogo().eliminarCatalogo(fila);
@@ -196,6 +218,39 @@ public class Catalogo extends javax.swing.JPanel {
         llenarTabla();
     }//GEN-LAST:event_comboEmpresaActionPerformed
 
+    private void modificarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarBtnMouseClicked
+        if (!tieneEmpresa()) {return;}
+        if (jTable1.isEditing()) {jTable1.getCellEditor().stopCellEditing();}
+        
+        int index = comboEmpresa.getSelectedIndex();
+        FuncionesGestion.EmpresaObject empresaActual = ventanaPrincipal.funcionesEmpresa.getEmpresas().get(index);
+        
+        ArrayList<FuncionesGestion.CatalogoObject> listaCatalogo = empresaActual.getMiCatalogo().getMiCatalogo();
+        
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            String nuevoCodigo = jTable1.getValueAt(i, 0).toString();
+            String nuevoNombre = jTable1.getValueAt(i, 1).toString();
+            String nuevoTipo = jTable1.getValueAt(i, 2).toString();
+            String nuevaNaturaleza = jTable1.getValueAt(i, 3).toString();
+            double nuevaCantidad = 0.0;
+            
+            try {
+                nuevaCantidad = Double.parseDouble(jTable1.getValueAt(i, 4).toString());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "¡Uy! El importe en la fila " + (i+1) + " está feito. Asegúrate de que sea un número.");
+                return; 
+            }
+            FuncionesGestion.CatalogoObject cuenta = listaCatalogo.get(i);
+            cuenta.setCodigo(nuevoCodigo);
+            cuenta.setNombre(nuevoNombre);
+            cuenta.setTipo(nuevoTipo);
+            cuenta.setNaturaleza(nuevaNaturaleza);
+            cuenta.setCantidad(nuevaCantidad);
+        }
+
+        JOptionPane.showMessageDialog(null, "Se modifico correctamente");
+    }//GEN-LAST:event_modificarBtnMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BuscarBtn;
@@ -205,5 +260,6 @@ public class Catalogo extends javax.swing.JPanel {
     private javax.swing.JLabel eliminarBtn;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel modificarBtn;
     // End of variables declaration//GEN-END:variables
 }

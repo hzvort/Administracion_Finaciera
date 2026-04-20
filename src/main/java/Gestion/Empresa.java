@@ -4,6 +4,7 @@ package Gestion;
 import App.Main;
 import Utils.AspectoUtils;
 import FuncionesGestion.EmpresaObject;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -44,6 +45,7 @@ public class Empresa extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         BuscarBtn = new javax.swing.JLabel();
+        modificarBtn = new javax.swing.JLabel();
         eliminarBtn = new javax.swing.JLabel();
         crearBtn = new javax.swing.JLabel();
         buscarText = new javax.swing.JTextField();
@@ -85,6 +87,20 @@ public class Empresa extends javax.swing.JPanel {
             }
         });
         add(BuscarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, 110, 50));
+
+        modificarBtn.setBackground(new java.awt.Color(83, 100, 82));
+        modificarBtn.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        modificarBtn.setForeground(new java.awt.Color(222, 213, 200));
+        modificarBtn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        modificarBtn.setText("Modificar");
+        modificarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        modificarBtn.setOpaque(true);
+        modificarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                modificarBtnMouseClicked(evt);
+            }
+        });
+        add(modificarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 390, 110, 50));
 
         eliminarBtn.setBackground(new java.awt.Color(83, 100, 82));
         eliminarBtn.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
@@ -161,6 +177,27 @@ public class Empresa extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_BuscarBtnMousePressed
 
+    private void modificarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarBtnMouseClicked
+        if (jTable1.isEditing()) {jTable1.getCellEditor().stopCellEditing();}
+        
+        ArrayList<FuncionesGestion.EmpresaObject> listaEmpresas = ventanaPrincipal.funcionesEmpresa.getEmpresas();
+        
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+        String nuevoNombre = jTable1.getValueAt(i, 0).toString();
+        String nuevoRfc = jTable1.getValueAt(i, 1).toString();
+        String nuevoGiro = jTable1.getValueAt(i, 2).toString();
+        String nuevoCorreo = jTable1.getValueAt(i, 3).toString();
+        FuncionesGestion.EmpresaObject empresa = listaEmpresas.get(i);
+        
+        empresa.setNombre(nuevoNombre);
+        empresa.setRfc(nuevoRfc);
+        empresa.setGiro(nuevoGiro);
+        empresa.setCorreo(nuevoCorreo);
+    }
+
+    JOptionPane.showMessageDialog(null, "Se modifico correctamente");
+    }//GEN-LAST:event_modificarBtnMouseClicked
+
     
     
     
@@ -171,5 +208,6 @@ public class Empresa extends javax.swing.JPanel {
     private javax.swing.JLabel eliminarBtn;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel modificarBtn;
     // End of variables declaration//GEN-END:variables
 }

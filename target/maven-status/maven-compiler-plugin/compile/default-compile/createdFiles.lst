@@ -13,6 +13,7 @@ FuncionesReportes\BalanceGeneralFunctions.class
 Utils\ValidacionesUtils.class
 FuncionesGestion\CatalogoFunctions.class
 FuncionesGestion\CatalogoObject.class
+Gestion\Catalogo$4.class
 Gestion\AddCatalogo$2.class
 App\Main$3.class
 Gestion\AddCatalogo.class
@@ -21,6 +22,7 @@ App\Login.class
 Utils\AspectoUtils.class
 App\Login$2.class
 App\Main$2.class
+Gestion\Empresa$4.class
 App\Login$4.class
 Gestion\Catalogo$1.class
 Gestion\Empresa$2.class

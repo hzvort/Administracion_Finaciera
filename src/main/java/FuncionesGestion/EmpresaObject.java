@@ -21,6 +21,11 @@ public class EmpresaObject {
     public String getGiro() {return giro;}
     public String getCorreo() {return correo;}
     
+    public void setNombre(String nombre) { this.nombre = nombre; }
+    public void setRfc(String rfc) { this.rfc = rfc; }
+    public void setGiro(String giro) { this.giro = giro; }
+    public void setCorreo(String correo) { this.correo = correo; }
+    
     public CatalogoFunctions getMiCatalogo() {
         return miCatalogo;
     }

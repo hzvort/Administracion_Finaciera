@@ -131,7 +131,7 @@ public class AddEmpresa extends javax.swing.JPanel {
         cancelBtn.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         cancelBtn.setForeground(new java.awt.Color(222, 213, 200));
         cancelBtn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        cancelBtn.setText("Cancelar");
+        cancelBtn.setText("Listo");
         cancelBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cancelBtn.setOpaque(true);
         cancelBtn.addMouseListener(new java.awt.event.MouseAdapter() {

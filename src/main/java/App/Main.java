@@ -209,6 +209,7 @@ public class Main extends javax.swing.JFrame {
     
     public void MostrarCatalogo() {
         actualizarBotones(catalogoBtn);
+        cat.llenarCombo();
         cat.llenarTabla();
         cardLayout.show(content, "PanelCatalogo");
     }

@@ -149,7 +149,7 @@ public class AddCatalogo extends javax.swing.JPanel {
         cancelarBtn.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         cancelarBtn.setForeground(new java.awt.Color(222, 213, 200));
         cancelarBtn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        cancelarBtn.setText("Cancelar");
+        cancelarBtn.setText("Listo");
         cancelarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cancelarBtn.setOpaque(true);
         cancelarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
