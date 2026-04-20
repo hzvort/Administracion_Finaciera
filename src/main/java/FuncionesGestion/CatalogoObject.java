@@ -1,4 +1,4 @@
-package function;
+package FuncionesGestion;
 
 public class CatalogoObject {
    private String codigo,nombre,tipo, naturaleza;

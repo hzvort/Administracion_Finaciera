@@ -2,8 +2,8 @@ package Gestion;
 
 import App.Main;
 import Utils.ValidacionesUtils;
-import function.CatalogoObject;
-import function.EmpresaObject;
+import FuncionesGestion.CatalogoObject;
+import FuncionesGestion.EmpresaObject;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -11,8 +11,8 @@ import javax.swing.JTextField;
 
 public class AddCatalogo extends javax.swing.JPanel {
     
-        private Main ventanaPrincipal;
-        private EmpresaObject empresaSeleccionada;
+        Main ventanaPrincipal;
+        EmpresaObject empresaSeleccionada;
     
     public AddCatalogo(Main ventanaPrincipal) {
         this.ventanaPrincipal = ventanaPrincipal;
@@ -175,7 +175,7 @@ public class AddCatalogo extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelarBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarBtnMousePressed
-        ventanaPrincipal.MostrarCatalogoForm();
+        ventanaPrincipal.MostrarCatalogo();
         limpiarCampos();
     }//GEN-LAST:event_cancelarBtnMousePressed
 
@@ -194,7 +194,6 @@ public class AddCatalogo extends javax.swing.JPanel {
         
         empresaSeleccionada.getMiCatalogo().agregarCatalogo(nuevaCuenta);
         JOptionPane.showMessageDialog(null, "Cuenta registrada exitosamente");
-        ventanaPrincipal.MostrarCatalogoForm();
         
         limpiarCampos();
     }//GEN-LAST:event_acceptBtnMousePressed
@@ -215,22 +214,14 @@ public class AddCatalogo extends javax.swing.JPanel {
         }
         try {
             double campo = Double.parseDouble(texto);
-                if (campo < 0) {
-                    nombre.setForeground(Color.red);
-                    JOptionPane.showMessageDialog(null, "El campo no puede ser negativo: " + nombre.getText());
-                    input.requestFocus();
-                    return false; 
-                } else {
-                    nombre.setForeground(new Color(222, 213, 200));
-                    return true;
-                }
+            nombre.setForeground(new Color(222, 213, 200));
+            return true;
         } catch (NumberFormatException e) {
                 nombre.setForeground(Color.red);
                 JOptionPane.showMessageDialog(null, "Por favor ingrese una cantidad numérica válida en: " + nombre.getText());
                 input.requestFocus();
                 return false;
             }
-        
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,6 +1,6 @@
 Gestion\Empresa$3.class
 Gestion\AddCatalogo$1.class
-function\EmpresaObject.class
+FuncionesGestion\EmpresaFunctions.class
 Gestion\AddEmpresa$1.class
 Gestion\Catalogo$2.class
 App\Login$3.class
@@ -8,12 +8,15 @@ Gestion\Empresa$1.class
 App\Main$1.class
 App\Main$5.class
 App\Main$6.class
+Reportes\BalanceGeneral$2.class
+FuncionesReportes\BalanceGeneralFunctions.class
 Utils\ValidacionesUtils.class
+FuncionesGestion\CatalogoFunctions.class
+FuncionesGestion\CatalogoObject.class
 Gestion\AddCatalogo$2.class
 App\Main$3.class
 Gestion\AddCatalogo.class
 App\Main.class
-function\CatalogoObject.class
 App\Login.class
 Utils\AspectoUtils.class
 App\Login$2.class
@@ -26,8 +29,8 @@ Gestion\Empresa.class
 Gestion\Catalogo$3.class
 App\Login$1.class
 App\Main$4.class
-function\CatalogoFunctions.class
-function\EmpresaFunctions.class
+FuncionesGestion\EmpresaObject.class
+Reportes\BalanceGeneral$1.class
 Reportes\BalanceGeneral.class
 Gestion\AddEmpresa.class
 Gestion\Catalogo.class

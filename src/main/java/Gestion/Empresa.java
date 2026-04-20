@@ -3,7 +3,7 @@ package Gestion;
 
 import App.Main;
 import Utils.AspectoUtils;
-import function.EmpresaObject;
+import FuncionesGestion.EmpresaObject;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 

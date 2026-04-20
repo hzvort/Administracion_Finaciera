@@ -3,8 +3,8 @@ package Gestion;
 
 import App.Main;
 import Utils.AspectoUtils;
-import function.CatalogoObject;
-import function.EmpresaObject;
+import FuncionesGestion.CatalogoObject;
+import FuncionesGestion.EmpresaObject;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
@@ -13,7 +13,7 @@ public class Catalogo extends javax.swing.JPanel {
             
         Main ventanaPrincipal;
         DefaultTableModel modelo;
-        public static EmpresaObject miEmpresa;
+        EmpresaObject miEmpresa;
     
     public Catalogo(Main ventanaPrincipal) {
         this.ventanaPrincipal = ventanaPrincipal;
@@ -26,7 +26,7 @@ public class Catalogo extends javax.swing.JPanel {
     }
     
     private void configurarTabla() {
-        String[] columnas = {"Codigo", "Nombre de la cuenta", "Tipo de cuenta", "Naturaleza", "cantidad"};
+        String[] columnas = {"Codigo", "Nombre de la cuenta", "Tipo de cuenta", "Naturaleza", "Importe"};
         modelo = new DefaultTableModel(columnas, 0);
         jTable1.setModel(modelo);
     }
@@ -49,7 +49,7 @@ public class Catalogo extends javax.swing.JPanel {
         }
     }
     
-    public  void llenarCombo() {
+    public void llenarCombo() {
             comboEmpresa.removeAllItems();
              if (ventanaPrincipal.funcionesEmpresa.empty()) {comboEmpresa.addItem("Sin Empresas"); return;}
         for (EmpresaObject e: ventanaPrincipal.funcionesEmpresa.getEmpresas()) {

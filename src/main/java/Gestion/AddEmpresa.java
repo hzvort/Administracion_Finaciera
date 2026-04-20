@@ -3,7 +3,7 @@ package Gestion;
 
 import App.Main;
 import Utils.ValidacionesUtils;
-import function.EmpresaObject;
+import FuncionesGestion.EmpresaObject;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -157,7 +157,7 @@ public class AddEmpresa extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelBtnMouseClicked
-        ventanaPrincipal.mostrarEmpresaForm();
+        ventanaPrincipal.mostrarEmpresa();
         limpiarCampos();
     }//GEN-LAST:event_cancelBtnMouseClicked
 
@@ -178,7 +178,7 @@ public class AddEmpresa extends javax.swing.JPanel {
         ventanaPrincipal.funcionesEmpresa.agregarEmpresa(nueva);
         JOptionPane.showMessageDialog(this, "Empresa guardada con éxito");
         cat.llenarCombo();
-        ventanaPrincipal.mostrarEmpresaForm();
+        ventanaPrincipal.mostrarEmpresa();
         
         limpiarCampos();
     }//GEN-LAST:event_acceptBtnMousePressed

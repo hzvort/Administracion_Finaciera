@@ -7,7 +7,7 @@ import Gestion.Catalogo;
 import Gestion.Empresa;
 import Reportes.BalanceGeneral;
 import com.formdev.flatlaf.FlatLightLaf;
-import function.EmpresaFunctions;
+import FuncionesGestion.EmpresaFunctions;
 import java.awt.CardLayout;
 import java.util.List;
 import javax.swing.JLabel;
@@ -201,13 +201,13 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    public void mostrarEmpresaForm() {
+    public void mostrarEmpresa() {
         actualizarBotones(empresaBtn);
         ef.llenarTabla();
         cardLayout.show(content, "PanelEmpresa");
     }
     
-    public void MostrarCatalogoForm() {
+    public void MostrarCatalogo() {
         actualizarBotones(catalogoBtn);
         cat.llenarTabla();
         cardLayout.show(content, "PanelCatalogo");
@@ -218,7 +218,7 @@ public class Main extends javax.swing.JFrame {
     
     public void MostrarBalanceGeneral() {
         actualizarBotones(balanceBtn);
-        cat.llenarTabla();
+        bg.llenarCombo();
         cardLayout.show(content, "PanelBalanceGeneral");
     }
     
@@ -251,11 +251,11 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_DragMousePressed
 
     private void catalogoBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_catalogoBtnMousePressed
-        MostrarCatalogoForm();
+        MostrarCatalogo();
     }//GEN-LAST:event_catalogoBtnMousePressed
 
     private void empresaBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_empresaBtnMousePressed
-        mostrarEmpresaForm();
+        mostrarEmpresa();
     }//GEN-LAST:event_empresaBtnMousePressed
 
     private void balanceBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_balanceBtnMousePressed
