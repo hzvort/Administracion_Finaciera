@@ -75,7 +75,7 @@ public class AddCatalogo extends javax.swing.JPanel {
         tipoCombo.setBackground(new java.awt.Color(141, 148, 132));
         tipoCombo.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         tipoCombo.setForeground(new java.awt.Color(83, 100, 82));
-        tipoCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Actico circulante", "Activo no cirulante", "Pasivo a corto plazo", "Pasivo a largo plazo", "Capital" }));
+        tipoCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Actico circulante", "Activo no cirulante", "Pasivo a corto plazo", "Pasivo a largo plazo", "Capital", "Ventas", "Costo de venta", "Gastos de operación", "Productos financieros", "Gastos financieros", "Impuestos" }));
         tipoCombo.setBorder(null);
 
         naturaleza.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N

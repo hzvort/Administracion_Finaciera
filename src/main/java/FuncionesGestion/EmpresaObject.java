@@ -1,6 +1,5 @@
 package FuncionesGestion;
 
-import java.util.ArrayList;
 
 public class EmpresaObject {
     

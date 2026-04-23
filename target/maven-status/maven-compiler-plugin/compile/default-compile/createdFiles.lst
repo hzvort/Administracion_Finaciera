@@ -1,6 +1,7 @@
 Gestion\Empresa$3.class
 Gestion\AddCatalogo$1.class
 FuncionesGestion\EmpresaFunctions.class
+Reportes\EstadoDeResultado$1.class
 Gestion\AddEmpresa$1.class
 Gestion\Catalogo$2.class
 App\Login$3.class
@@ -26,11 +27,14 @@ Gestion\Empresa$4.class
 App\Login$4.class
 Gestion\Catalogo$1.class
 Gestion\Empresa$2.class
+FuncionesReportes\EstadoDeResultadoFunctions.class
 Gestion\AddEmpresa$2.class
 Gestion\Empresa.class
+Reportes\EstadoDeResultado.class
 Gestion\Catalogo$3.class
 App\Login$1.class
 App\Main$4.class
+App\Main$7.class
 FuncionesGestion\EmpresaObject.class
 Reportes\BalanceGeneral$1.class
 Reportes\BalanceGeneral.class

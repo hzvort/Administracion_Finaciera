@@ -8,6 +8,7 @@ import Gestion.Empresa;
 import Reportes.BalanceGeneral;
 import com.formdev.flatlaf.FlatLightLaf;
 import FuncionesGestion.EmpresaFunctions;
+import Reportes.EstadoDeResultado;
 import java.awt.CardLayout;
 import java.util.List;
 import javax.swing.JLabel;
@@ -27,6 +28,7 @@ public class Main extends javax.swing.JFrame {
     
     //variables Reportes
     BalanceGeneral bg;
+    EstadoDeResultado edr;
     
     public EmpresaFunctions funcionesEmpresa = new EmpresaFunctions();
     
@@ -50,7 +52,10 @@ public class Main extends javax.swing.JFrame {
         
         //variables Reportes
         bg = new BalanceGeneral(this);
+        edr = new EstadoDeResultado(this);
+        
         content.add(bg, "PanelBalanceGeneral");
+        content.add(edr, "PanelEstadoDeResultado");
         
         
         cat.llenarCombo();
@@ -82,6 +87,7 @@ public class Main extends javax.swing.JFrame {
         leftPanel = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         empresaBtn = new javax.swing.JLabel();
+        estadoBtn = new javax.swing.JLabel();
         balanceBtn = new javax.swing.JLabel();
         catalogoBtn = new javax.swing.JLabel();
         content = new javax.swing.JPanel();
@@ -153,6 +159,20 @@ public class Main extends javax.swing.JFrame {
         });
         leftPanel.add(empresaBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 210, 40));
 
+        estadoBtn.setBackground(new java.awt.Color(192, 213, 184));
+        estadoBtn.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        estadoBtn.setForeground(new java.awt.Color(83, 100, 82));
+        estadoBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        estadoBtn.setText("Estado De Resultado");
+        estadoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        estadoBtn.setOpaque(true);
+        estadoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                estadoBtnMousePressed(evt);
+            }
+        });
+        leftPanel.add(estadoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 210, 40));
+
         balanceBtn.setBackground(new java.awt.Color(192, 213, 184));
         balanceBtn.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         balanceBtn.setForeground(new java.awt.Color(83, 100, 82));
@@ -216,15 +236,20 @@ public class Main extends javax.swing.JFrame {
     
     public void MostrarAddEmpresa() {cardLayout.show(content, "PanelAddEmpresa");}
     public void MostrarAddCatalogo() {cardLayout.show(content, "PanelAddCatalogo");}
-    
+     
     public void MostrarBalanceGeneral() {
         actualizarBotones(balanceBtn);
         bg.llenarCombo();
         cardLayout.show(content, "PanelBalanceGeneral");
     }
     
+    public void MostrarEstadoDeResultado() {
+        actualizarBotones(estadoBtn);
+        edr.llenarCombo();
+        cardLayout.show(content, "PanelEstadoDeResultado");
+    }
     private void actualizarBotones(JLabel botonSeleccionado) {
-        List<JLabel> botones = List.of(catalogoBtn, empresaBtn, balanceBtn);
+        List<JLabel> botones = List.of(catalogoBtn, empresaBtn, balanceBtn, estadoBtn); //importante esto
         for (JLabel btn : botones) {
             if (btn == botonSeleccionado) {
                 btn.setBackground(new java.awt.Color(221, 213, 201));
@@ -263,6 +288,10 @@ public class Main extends javax.swing.JFrame {
         MostrarBalanceGeneral();
     }//GEN-LAST:event_balanceBtnMousePressed
 
+    private void estadoBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estadoBtnMousePressed
+        MostrarEstadoDeResultado();
+    }//GEN-LAST:event_estadoBtnMousePressed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -293,6 +322,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel close;
     public javax.swing.JPanel content;
     private javax.swing.JLabel empresaBtn;
+    private javax.swing.JLabel estadoBtn;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel leftPanel;
     // End of variables declaration//GEN-END:variables

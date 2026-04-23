@@ -86,6 +86,7 @@ public class BalanceGeneral extends javax.swing.JPanel {
         comboBalance = new javax.swing.JComboBox<>();
         Fecha = new javax.swing.JPanel();
         cambioInput = new javax.swing.JTextField();
+        generarBtn1 = new javax.swing.JLabel();
         generarBtn = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pasivoTable = new javax.swing.JTable();
@@ -134,6 +135,15 @@ public class BalanceGeneral extends javax.swing.JPanel {
         cambioInput.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         cambioInput.setText("...");
         add(cambioInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 120, 40));
+
+        generarBtn1.setBackground(new java.awt.Color(83, 100, 82));
+        generarBtn1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        generarBtn1.setForeground(new java.awt.Color(222, 213, 200));
+        generarBtn1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        generarBtn1.setText("Exportar");
+        generarBtn1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        generarBtn1.setOpaque(true);
+        add(generarBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, 120, 50));
 
         generarBtn.setBackground(new java.awt.Color(83, 100, 82));
         generarBtn.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
@@ -290,6 +300,7 @@ public class BalanceGeneral extends javax.swing.JPanel {
     private javax.swing.JTable capitalTable;
     public javax.swing.JComboBox<String> comboBalance;
     private javax.swing.JLabel generarBtn;
+    private javax.swing.JLabel generarBtn1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
