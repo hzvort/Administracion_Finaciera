@@ -4,6 +4,7 @@ package Gestion;
 import App.Main;
 import Utils.AspectoUtils;
 import FuncionesGestion.EmpresaObject;
+import Utils.ValidacionesUtils;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -13,11 +14,15 @@ public class Empresa extends javax.swing.JPanel {
     private Main ventanaPrincipal;
     DefaultTableModel modelo;        
     
-    public Empresa(Main ventanaPrincipal) {
+    public Empresa(Main ventanaPrincipal) {  
         this.ventanaPrincipal = ventanaPrincipal;
+        
         ventanaPrincipal.flatStile();
         initComponents();
         AspectoUtils.tableAspect(jTable1);
+        buscarText.putClientProperty("JTextField.placeholderText", "Ingrese un RFC para buscar");
+        
+        
         configurarTabla();
         llenarTabla();
     }
@@ -134,7 +139,6 @@ public class Empresa extends javax.swing.JPanel {
         buscarText.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         buscarText.setForeground(new java.awt.Color(83, 100, 82));
         buscarText.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        buscarText.setText("...");
         add(buscarText, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 350, 50));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -143,9 +147,10 @@ public class Empresa extends javax.swing.JPanel {
     }//GEN-LAST:event_crearBtnMouseClicked
 
     private void eliminarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarBtnMouseClicked
-         int fila = jTable1.getSelectedRow();
+        if (!ValidacionesUtils.confirmacion("Esta seguro que quiere Eliminar esta fila?")) {return;}
+        
+        int fila = jTable1.getSelectedRow();
             if (fila != -1) {
-            // 1. Lo borramos de la lista lógica
             ventanaPrincipal.funcionesEmpresa.eliminarEmpresa(fila);
             llenarTabla();
             JOptionPane.showMessageDialog(this, "Empresa eliminada");
@@ -179,6 +184,8 @@ public class Empresa extends javax.swing.JPanel {
 
     private void modificarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarBtnMouseClicked
         if (jTable1.isEditing()) {jTable1.getCellEditor().stopCellEditing();}
+        
+        if (!ValidacionesUtils.confirmacion("Esta seguro que quiere modificar?")) {return;}
         
         ArrayList<FuncionesGestion.EmpresaObject> listaEmpresas = ventanaPrincipal.funcionesEmpresa.getEmpresas();
         

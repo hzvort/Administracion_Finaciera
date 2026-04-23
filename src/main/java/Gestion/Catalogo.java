@@ -5,6 +5,7 @@ import App.Main;
 import Utils.AspectoUtils;
 import FuncionesGestion.CatalogoObject;
 import FuncionesGestion.EmpresaObject;
+import Utils.ValidacionesUtils;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -17,11 +18,14 @@ public class Catalogo extends javax.swing.JPanel {
         EmpresaObject miEmpresa;
     
     public Catalogo(Main ventanaPrincipal) {
+        initComponents();
         this.ventanaPrincipal = ventanaPrincipal;
+        
         ventanaPrincipal.flatStile();
         UIManager.put( "ComboBox.buttonBackground", new java.awt.Color(83,100,82) );
-        initComponents();
         AspectoUtils.tableAspect(jTable1);
+        buscarText.putClientProperty("JTextField.placeholderText", "Ingrese un codigo para buscar");
+        
         configurarTabla();
         llenarTabla();
     }
@@ -98,7 +102,7 @@ public class Catalogo extends javax.swing.JPanel {
         buscarText.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         buscarText.setForeground(new java.awt.Color(83, 100, 82));
         buscarText.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        buscarText.setText("...");
+        buscarText.setToolTipText("");
         add(buscarText, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 410, 50));
 
         eliminarBtn.setBackground(new java.awt.Color(83, 100, 82));
@@ -182,6 +186,8 @@ public class Catalogo extends javax.swing.JPanel {
 
     private void eliminarBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarBtnMousePressed
         if (!tieneEmpresa()) {return;} 
+        if (!ValidacionesUtils.confirmacion("Esta seguro que quiere modificar?")) {return;}
+        
         int fila = jTable1.getSelectedRow();
         int indexEmpresa = comboEmpresa.getSelectedIndex();
         EmpresaObject empresaActual = ventanaPrincipal.funcionesEmpresa.getEmpresas().get(indexEmpresa);
@@ -220,6 +226,7 @@ public class Catalogo extends javax.swing.JPanel {
 
     private void modificarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarBtnMouseClicked
         if (!tieneEmpresa()) {return;}
+        if (!ValidacionesUtils.confirmacion("Esta seguro que quiere modificar?")) {return;}
         if (jTable1.isEditing()) {jTable1.getCellEditor().stopCellEditing();}
         
         int index = comboEmpresa.getSelectedIndex();

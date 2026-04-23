@@ -19,6 +19,21 @@ public class ValidacionesUtils {
             return true;
         }
     }
+    
+    public static boolean confirmacion(String mensaje){
+        int respuesta = JOptionPane.showConfirmDialog(
+            null, 
+            mensaje, 
+            "Confirmación", 
+            JOptionPane.YES_NO_OPTION
+        );
+        
+        if (respuesta == JOptionPane.YES_OPTION) {
+            return true;
+        } else {
+            return false;
+        }
+    }
  
     
 }

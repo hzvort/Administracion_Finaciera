@@ -1,5 +1,6 @@
 package App;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
@@ -10,6 +11,8 @@ public class Login extends javax.swing.JFrame {
 
     public Login() {
         initComponents();
+        pasInput.putClientProperty("JPasswordField.showRevealButton", true);
+        
         this.setLocationRelativeTo(null);
     }
 
@@ -210,7 +213,6 @@ public class Login extends javax.swing.JFrame {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new Login().setVisible(true));
     }
