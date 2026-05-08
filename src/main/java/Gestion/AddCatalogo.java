@@ -4,6 +4,7 @@ import App.Main;
 import Utils.ValidacionesUtils;
 import FuncionesGestion.CatalogoObject;
 import FuncionesGestion.EmpresaObject;
+import Utils.AspectoUtils;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -16,7 +17,7 @@ public class AddCatalogo extends javax.swing.JPanel {
     
     public AddCatalogo(Main ventanaPrincipal) {
         this.ventanaPrincipal = ventanaPrincipal;
-        ventanaPrincipal.flatStile();
+        AspectoUtils.flatStile();
         initComponents();
     }
     

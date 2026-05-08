@@ -10,7 +10,7 @@ public class EmpresaFunctions {
     }
     
     public void agregarEmpresa(EmpresaObject numevaEmpresa) {
-        empresa.add(numevaEmpresa); //nuevo estuante
+        empresa.add(numevaEmpresa);
     } 
     
     public void eliminarEmpresa(int valor) {

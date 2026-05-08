@@ -35,5 +35,21 @@ public class ValidacionesUtils {
         }
     }
  
+    public static boolean doubleCheck(JTextField input) {
+        String texto = input.getText().trim();
+        if (texto.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Porfavor rellene el tipo de cambio");
+            input.requestFocus();
+            return false;
+        }
+        try {
+            double campo = Double.parseDouble(texto);
+            return true;
+        } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Por favor ingrese una cantidad numérica válida en el tipo de cambio" );
+                input.requestFocus();
+                return false;
+            }
+    }
     
 }

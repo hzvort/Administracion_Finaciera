@@ -21,7 +21,7 @@ public class EstadoDeResultado extends javax.swing.JPanel {
         
         AspectoUtils.tableAspect(utilidadBrutaTable); AspectoUtils.tableAspect(UtilidadAntesImpuestoTable);
         AspectoUtils.tableAspect(UtilidadNetaTable); AspectoUtils.tableAspect(UtilidadOperacionesTable);
-        ventanaPrincipal.flatStile();
+        AspectoUtils.flatStile();
         
         configurarTabla(utilidadBrutaTable);  configurarTabla(UtilidadAntesImpuestoTable);
         configurarTabla(UtilidadNetaTable);  configurarTabla(UtilidadOperacionesTable);

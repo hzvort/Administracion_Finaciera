@@ -11,17 +11,16 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class Empresa extends javax.swing.JPanel {
-    private Main ventanaPrincipal;
-    DefaultTableModel modelo;        
+    private final Main ventanaPrincipal;
+    private DefaultTableModel modelo;   
     
     public Empresa(Main ventanaPrincipal) {  
         this.ventanaPrincipal = ventanaPrincipal;
         
-        ventanaPrincipal.flatStile();
+        AspectoUtils.flatStile();
         initComponents();
         AspectoUtils.tableAspect(jTable1);
-        buscarText.putClientProperty("JTextField.placeholderText", "Ingrese un RFC para buscar");
-        
+        buscarText.putClientProperty("JTextField.placeholderText", "Ingrese un RFC para buscar"); //FLATLAF
         
         configurarTabla();
         llenarTabla();
@@ -41,8 +40,6 @@ public class Empresa extends javax.swing.JPanel {
         }
     }
     
-    
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -187,27 +184,23 @@ public class Empresa extends javax.swing.JPanel {
         
         if (!ValidacionesUtils.confirmacion("Esta seguro que quiere modificar?")) {return;}
         
-        ArrayList<FuncionesGestion.EmpresaObject> listaEmpresas = ventanaPrincipal.funcionesEmpresa.getEmpresas();
-        
-        for (int i = 0; i < jTable1.getRowCount(); i++) {
-        String nuevoNombre = jTable1.getValueAt(i, 0).toString();
-        String nuevoRfc = jTable1.getValueAt(i, 1).toString();
-        String nuevoGiro = jTable1.getValueAt(i, 2).toString();
-        String nuevoCorreo = jTable1.getValueAt(i, 3).toString();
-        FuncionesGestion.EmpresaObject empresa = listaEmpresas.get(i);
-        
-        empresa.setNombre(nuevoNombre);
-        empresa.setRfc(nuevoRfc);
-        empresa.setGiro(nuevoGiro);
-        empresa.setCorreo(nuevoCorreo);
-    }
+            ArrayList<FuncionesGestion.EmpresaObject> listaEmpresas = ventanaPrincipal.funcionesEmpresa.getEmpresas();
 
-    JOptionPane.showMessageDialog(null, "Se modifico correctamente");
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+            String nuevoNombre = jTable1.getValueAt(i, 0).toString();
+            String nuevoRfc = jTable1.getValueAt(i, 1).toString();
+            String nuevoGiro = jTable1.getValueAt(i, 2).toString();
+            String nuevoCorreo = jTable1.getValueAt(i, 3).toString();
+            FuncionesGestion.EmpresaObject empresa = listaEmpresas.get(i);
+
+            empresa.setNombre(nuevoNombre);
+            empresa.setRfc(nuevoRfc);
+            empresa.setGiro(nuevoGiro);
+            empresa.setCorreo(nuevoCorreo);
+        }
+        JOptionPane.showMessageDialog(null, "Se modifico correctamente");
     }//GEN-LAST:event_modificarBtnMouseClicked
 
-    
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BuscarBtn;
     private javax.swing.JTextField buscarText;

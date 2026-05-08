@@ -21,7 +21,7 @@ public class Catalogo extends javax.swing.JPanel {
         initComponents();
         this.ventanaPrincipal = ventanaPrincipal;
         
-        ventanaPrincipal.flatStile();
+        AspectoUtils.flatStile();
         UIManager.put( "ComboBox.buttonBackground", new java.awt.Color(83,100,82) );
         AspectoUtils.tableAspect(jTable1);
         buscarText.putClientProperty("JTextField.placeholderText", "Ingrese un codigo para buscar");

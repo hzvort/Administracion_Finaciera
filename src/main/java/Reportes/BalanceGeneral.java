@@ -8,21 +8,24 @@ import FuncionesReportes.BalanceGeneralFunctions;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
+import ReportesExportacion.ExportadorBalanceCSV;
+import Utils.ValidacionesUtils;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 public class BalanceGeneral extends javax.swing.JPanel {
 
-    Main ventanaPrincipal;
-    BalanceGeneralFunctions funcionesBg;
+    private final Main ventanaPrincipal;
+    private final BalanceGeneralFunctions funcionesBg;
+    private final ExportadorBalanceCSV exportarCSV;
     
     public BalanceGeneral(Main ventanaPrincipal) {
         initComponents();
         this.funcionesBg = new BalanceGeneralFunctions(ventanaPrincipal);
+        this.exportarCSV = new ExportadorBalanceCSV();
         this.ventanaPrincipal = ventanaPrincipal;
         
-        ventanaPrincipal.flatStile();
+        AspectoUtils.flatStile();
         UIManager.put( "ComboBox.buttonBackground", new java.awt.Color(83,100,82) );
         
         AspectoUtils.tableAspect(activoTable); AspectoUtils.tableAspect(pasivoTable); AspectoUtils.tableAspect(capitalTable);
@@ -39,15 +42,15 @@ public class BalanceGeneral extends javax.swing.JPanel {
         DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
         modelo.setRowCount(0);
         if (comboBalance.getItemCount() == 0 || comboBalance.getSelectedItem().toString().equals("Sin Empresas")) { return; }
-        int index = comboBalance.getSelectedIndex();
-        EmpresaObject empresaActual = ventanaPrincipal.funcionesEmpresa.getEmpresas().get(index);
-        
-        for (CatalogoObject cuenta : empresaActual.getMiCatalogo().getMiCatalogo()) {
-            if (!cuenta.getTipo().equals(tipo) && !cuenta.getTipo().equals(tipo2)) {continue;}
-            
-        Object[] fila = {
-            cuenta.getNombre(),
-            cuenta.getCantidad()
+            int index = comboBalance.getSelectedIndex();
+            EmpresaObject empresaActual = ventanaPrincipal.funcionesEmpresa.getEmpresas().get(index);
+
+            for (CatalogoObject cuenta : empresaActual.getMiCatalogo().getMiCatalogo()) {
+                if (!cuenta.getTipo().equals(tipo) && !cuenta.getTipo().equals(tipo2)) {continue;}
+
+            Object[] fila = {
+                cuenta.getNombre(),
+                cuenta.getCantidad()
         };
         modelo.addRow(fila);
         }
@@ -86,7 +89,7 @@ public class BalanceGeneral extends javax.swing.JPanel {
         comboBalance = new javax.swing.JComboBox<>();
         Fecha = new javax.swing.JPanel();
         cambioInput = new javax.swing.JTextField();
-        generarBtn1 = new javax.swing.JLabel();
+        Exportar = new javax.swing.JLabel();
         generarBtn = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pasivoTable = new javax.swing.JTable();
@@ -136,14 +139,19 @@ public class BalanceGeneral extends javax.swing.JPanel {
         cambioInput.setText("...");
         add(cambioInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 120, 40));
 
-        generarBtn1.setBackground(new java.awt.Color(83, 100, 82));
-        generarBtn1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        generarBtn1.setForeground(new java.awt.Color(222, 213, 200));
-        generarBtn1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        generarBtn1.setText("Exportar");
-        generarBtn1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        generarBtn1.setOpaque(true);
-        add(generarBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, 120, 50));
+        Exportar.setBackground(new java.awt.Color(83, 100, 82));
+        Exportar.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        Exportar.setForeground(new java.awt.Color(222, 213, 200));
+        Exportar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Exportar.setText("Exportar");
+        Exportar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Exportar.setOpaque(true);
+        Exportar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ExportarMouseClicked(evt);
+            }
+        });
+        add(Exportar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, 120, 50));
 
         generarBtn.setBackground(new java.awt.Color(83, 100, 82));
         generarBtn.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
@@ -267,27 +275,23 @@ public class BalanceGeneral extends javax.swing.JPanel {
     }//GEN-LAST:event_generarBtnMousePressed
 
     private void cambioBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambioBtnMousePressed
-        if (!doubleCheck(cambioInput)) { return;}
+        if (!ValidacionesUtils.doubleCheck(cambioInput)) { return;}
     }//GEN-LAST:event_cambioBtnMousePressed
 
-    private boolean doubleCheck(JTextField input) {
-        String texto = input.getText().trim();
-        if (texto.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Porfavor rellene el tipo de cambio");
-            input.requestFocus();
-            return false;
-        }
-        try {
-            double campo = Double.parseDouble(texto);
-            return true;
-        } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Por favor ingrese una cantidad numérica válida en el tipo de cambio" );
-                input.requestFocus();
-                return false;
-            }
-    }
+    private void ExportarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExportarMouseClicked
+        int index = comboBalance.getSelectedIndex();
+        String content = """
+                         Clasificación,Cuenta,Importe,Total Por Grupo
+                         Activo
+                         Activo Circulante
+                         """;
+        content = exportarCSV.filtro(index, "Actico circulante", content);
+        exportarCSV.exportarBalanceCSV(content);
+    }//GEN-LAST:event_ExportarMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Exportar;
     private javax.swing.JPanel Fecha;
     private javax.swing.JLabel Result;
     private javax.swing.JLabel activoLabel;
@@ -300,7 +304,6 @@ public class BalanceGeneral extends javax.swing.JPanel {
     private javax.swing.JTable capitalTable;
     public javax.swing.JComboBox<String> comboBalance;
     private javax.swing.JLabel generarBtn;
-    private javax.swing.JLabel generarBtn1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

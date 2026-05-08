@@ -6,33 +6,31 @@ import Gestion.AddEmpresa;
 import Gestion.Catalogo;
 import Gestion.Empresa;
 import Reportes.BalanceGeneral;
-import com.formdev.flatlaf.FlatLightLaf;
 import FuncionesGestion.EmpresaFunctions;
 import Reportes.EstadoDeResultado;
 import java.awt.CardLayout;
 import java.util.List;
 import javax.swing.JLabel;
-import javax.swing.UIManager;
 
 
 public class Main extends javax.swing.JFrame {
     
-    int xmouse, ymouse;
-    CardLayout cardLayout;
+    private int xmouse, ymouse;
+    private final CardLayout cardLayout;
     
     //variables Gestion
-    Empresa ef;
-    Catalogo cat;
-    AddEmpresa addEf;
+    private final Empresa ef;
+    private final Catalogo cat;
+    private final AddEmpresa addEf;
     public AddCatalogo addCat;
     
     //variables Reportes
-    BalanceGeneral bg;
-    EstadoDeResultado edr;
+    private final BalanceGeneral bg;
+    private final EstadoDeResultado edr;
     
     public EmpresaFunctions funcionesEmpresa = new EmpresaFunctions();
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Main.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Main.class.getName()); //IGNORAR
 
     public Main() {
         initComponents();
@@ -60,21 +58,8 @@ public class Main extends javax.swing.JFrame {
         
         cat.llenarCombo();
         ef.llenarTabla();
-        this.setLocationRelativeTo(null);
         cardLayout.show(content, "PanelEmpresa");
-    }
-    
-    public void flatStile() {
-     try {
-            UIManager.setLookAndFeel( new FlatLightLaf() );
-        } catch( Exception ex ) {
-            System.err.println( "Failed to initialize LaF" );
-        }
-        UIManager.put( "ComboBox.background", new java.awt.Color(141,148,132) );
-        UIManager.put( "ComboBox.buttonBackground", new java.awt.Color(141,148,132) );
-        UIManager.put( "ComboBox.selectionBackground", new java.awt.Color(209,213,194) );
-        UIManager.put( "ComboBox.foreground", new java.awt.Color(83,100,82) );
-        UIManager.put( "ComboBox.buttonArrowColor", new java.awt.Color(222,213,200) );
+        this.setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

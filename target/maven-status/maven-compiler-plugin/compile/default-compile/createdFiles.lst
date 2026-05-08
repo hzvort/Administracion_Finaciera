@@ -15,6 +15,7 @@ Utils\ValidacionesUtils.class
 FuncionesGestion\CatalogoFunctions.class
 FuncionesGestion\CatalogoObject.class
 Gestion\Catalogo$4.class
+ReportesExportacion\ExportadorBalanceCSV.class
 Gestion\AddCatalogo$2.class
 App\Main$3.class
 Gestion\AddCatalogo.class
@@ -29,6 +30,7 @@ Gestion\Catalogo$1.class
 Gestion\Empresa$2.class
 FuncionesReportes\EstadoDeResultadoFunctions.class
 Gestion\AddEmpresa$2.class
+Reportes\BalanceGeneral$3.class
 Gestion\Empresa.class
 Reportes\EstadoDeResultado.class
 Gestion\Catalogo$3.class

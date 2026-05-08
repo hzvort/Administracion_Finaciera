@@ -1,6 +1,5 @@
 package App;
 
-import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
@@ -11,7 +10,6 @@ public class Login extends javax.swing.JFrame {
 
     public Login() {
         initComponents();
-        pasInput.putClientProperty("JPasswordField.showRevealButton", true);
         
         this.setLocationRelativeTo(null);
     }
