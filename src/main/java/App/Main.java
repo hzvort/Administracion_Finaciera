@@ -1,13 +1,9 @@
 
 package App;
 
-import Gestion.AddCatalogo;
-import Gestion.AddEmpresa;
-import Gestion.Catalogo;
-import Gestion.Empresa;
-import Reportes.BalanceGeneral;
+import Gestion.*;
+import Reportes.*;
 import FuncionesGestion.EmpresaFunctions;
-import Reportes.EstadoDeResultado;
 import java.awt.CardLayout;
 import java.util.List;
 import javax.swing.JLabel;
@@ -27,6 +23,9 @@ public class Main extends javax.swing.JFrame {
     //variables Reportes
     private final BalanceGeneral panelBalanceGeneral;
     private final EstadoDeResultado panelEstadoResultado;
+    private final PartidaDoble panelPartidaDoble;
+    private final AnalisisVerticalYHorizontal PanelAnalisisVyH;
+    
     
     public EmpresaFunctions funcionesEmpresa = new EmpresaFunctions();
     
@@ -46,6 +45,8 @@ public class Main extends javax.swing.JFrame {
         //variables Reportes
         panelBalanceGeneral = new BalanceGeneral(this);
         panelEstadoResultado = new EstadoDeResultado(this);
+        PanelAnalisisVyH = new AnalisisVerticalYHorizontal(this);
+        panelPartidaDoble = new PartidaDoble(this);
         
         content.add(panelEmpresa, "PanelEmpresa"); 
         content.add(panelCatalogo, "PanelCatalogo");
@@ -54,7 +55,8 @@ public class Main extends javax.swing.JFrame {
         
         content.add(panelBalanceGeneral, "PanelBalanceGeneral");
         content.add(panelEstadoResultado, "PanelEstadoDeResultado");
-        
+        content.add(PanelAnalisisVyH, "PanelAnalisisVyH");
+        content.add(panelPartidaDoble, "PanelPartidaDoble");
         
         panelCatalogo.llenarCombo();
         panelEmpresa.llenarTabla();
@@ -75,9 +77,9 @@ public class Main extends javax.swing.JFrame {
         empresaBtn = new javax.swing.JLabel();
         balanceBtn = new javax.swing.JLabel();
         catalogoBtn = new javax.swing.JLabel();
-        partidaDoble = new javax.swing.JLabel();
+        partidaDobleBtn = new javax.swing.JLabel();
         estadoBtn = new javax.swing.JLabel();
-        analisisVH = new javax.swing.JLabel();
+        analisisVHBtn = new javax.swing.JLabel();
         content = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -175,19 +177,19 @@ public class Main extends javax.swing.JFrame {
         });
         leftPanel.add(catalogoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 210, 40));
 
-        partidaDoble.setBackground(new java.awt.Color(192, 213, 184));
-        partidaDoble.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        partidaDoble.setForeground(new java.awt.Color(83, 100, 82));
-        partidaDoble.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        partidaDoble.setText("Partida Doble");
-        partidaDoble.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        partidaDoble.setOpaque(true);
-        partidaDoble.addMouseListener(new java.awt.event.MouseAdapter() {
+        partidaDobleBtn.setBackground(new java.awt.Color(192, 213, 184));
+        partidaDobleBtn.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        partidaDobleBtn.setForeground(new java.awt.Color(83, 100, 82));
+        partidaDobleBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        partidaDobleBtn.setText("Partida Doble");
+        partidaDobleBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        partidaDobleBtn.setOpaque(true);
+        partidaDobleBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                partidaDobleMousePressed(evt);
+                partidaDobleBtnMousePressed(evt);
             }
         });
-        leftPanel.add(partidaDoble, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 210, 40));
+        leftPanel.add(partidaDobleBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 210, 40));
 
         estadoBtn.setBackground(new java.awt.Color(192, 213, 184));
         estadoBtn.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
@@ -203,19 +205,19 @@ public class Main extends javax.swing.JFrame {
         });
         leftPanel.add(estadoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 210, 40));
 
-        analisisVH.setBackground(new java.awt.Color(192, 213, 184));
-        analisisVH.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        analisisVH.setForeground(new java.awt.Color(83, 100, 82));
-        analisisVH.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        analisisVH.setText("Análisis vertical-horizontal ");
-        analisisVH.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        analisisVH.setOpaque(true);
-        analisisVH.addMouseListener(new java.awt.event.MouseAdapter() {
+        analisisVHBtn.setBackground(new java.awt.Color(192, 213, 184));
+        analisisVHBtn.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        analisisVHBtn.setForeground(new java.awt.Color(83, 100, 82));
+        analisisVHBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        analisisVHBtn.setText("Análisis vertical-horizontal ");
+        analisisVHBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        analisisVHBtn.setOpaque(true);
+        analisisVHBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                analisisVHMousePressed(evt);
+                analisisVHBtnMousePressed(evt);
             }
         });
-        leftPanel.add(analisisVH, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 210, 40));
+        leftPanel.add(analisisVHBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 210, 40));
 
         bgPanel.add(leftPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 500));
 
@@ -264,8 +266,20 @@ public class Main extends javax.swing.JFrame {
         panelEstadoResultado.llenarCombo();
         cardLayout.show(content, "PanelEstadoDeResultado");
     }
+    
+    public void MostrarAnalisis() {
+        actualizarBotones(analisisVHBtn);
+        PanelAnalisisVyH.llenarCombo();
+        cardLayout.show(content, "PanelAnalisisVyH");
+    }
+    
+    public void MostrarPartidaDoble() {
+        actualizarBotones(partidaDobleBtn);
+        panelPartidaDoble.llenarCombo();
+        cardLayout.show(content, "PanelPartidaDoble");
+    }
     private void actualizarBotones(JLabel botonSeleccionado) {
-        List<JLabel> botones = List.of(catalogoBtn, empresaBtn, balanceBtn, estadoBtn); //importante esto
+        List<JLabel> botones = List.of(catalogoBtn, empresaBtn, balanceBtn, estadoBtn, analisisVHBtn,partidaDobleBtn); //importante esto
         for (JLabel btn : botones) {
             if (btn == botonSeleccionado) {
                 btn.setBackground(new java.awt.Color(221, 213, 201));
@@ -308,13 +322,13 @@ public class Main extends javax.swing.JFrame {
         MostrarEstadoDeResultado();
     }//GEN-LAST:event_estadoBtnMousePressed
 
-    private void partidaDobleMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_partidaDobleMousePressed
+    private void partidaDobleBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_partidaDobleBtnMousePressed
+        MostrarPartidaDoble();
+    }//GEN-LAST:event_partidaDobleBtnMousePressed
 
-    }//GEN-LAST:event_partidaDobleMousePressed
-
-    private void analisisVHMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_analisisVHMousePressed
-   
-    }//GEN-LAST:event_analisisVHMousePressed
+    private void analisisVHBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_analisisVHBtnMousePressed
+        MostrarAnalisis();
+    }//GEN-LAST:event_analisisVHBtnMousePressed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -340,7 +354,7 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Drag;
-    private javax.swing.JLabel analisisVH;
+    private javax.swing.JLabel analisisVHBtn;
     private javax.swing.JLabel balanceBtn;
     private javax.swing.JPanel bgPanel;
     private javax.swing.JLabel catalogoBtn;
@@ -350,6 +364,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel estadoBtn;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel leftPanel;
-    private javax.swing.JLabel partidaDoble;
+    private javax.swing.JLabel partidaDobleBtn;
     // End of variables declaration//GEN-END:variables
 }

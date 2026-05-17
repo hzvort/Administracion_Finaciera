@@ -13,9 +13,10 @@ import javax.swing.table.DefaultTableModel;
 
 public class Catalogo extends javax.swing.JPanel {
             
-        Main ventanaPrincipal;
-        DefaultTableModel modelo;
-        EmpresaObject miEmpresa;
+        private Main ventanaPrincipal;
+        private DefaultTableModel modelo;
+        private EmpresaObject miEmpresa;
+        private boolean cargando = false;
     
     public Catalogo(Main ventanaPrincipal) {
         initComponents();
@@ -40,6 +41,11 @@ public class Catalogo extends javax.swing.JPanel {
         modelo.setRowCount(0);
         if (comboEmpresa.getItemCount() == 0 || comboEmpresa.getSelectedItem().toString().equals("Sin Empresas")) { return; }
         int index = comboEmpresa.getSelectedIndex();
+        
+        if (index < 0 || index >= ventanaPrincipal.funcionesEmpresa.getEmpresas().size()) {
+            return; 
+        }
+        
         EmpresaObject empresaActual = ventanaPrincipal.funcionesEmpresa.getEmpresas().get(index);
         
         for (CatalogoObject cuenta : empresaActual.getMiCatalogo().getMiCatalogo()) {
@@ -55,11 +61,13 @@ public class Catalogo extends javax.swing.JPanel {
     }
     
     public void llenarCombo() {
-            comboEmpresa.removeAllItems();
-             if (ventanaPrincipal.funcionesEmpresa.empty()) {comboEmpresa.addItem("Sin Empresas"); return;}
+        cargando = true;
+        comboEmpresa.removeAllItems();
+        if (ventanaPrincipal.funcionesEmpresa.empty()) {comboEmpresa.addItem("Sin Empresas"); return;}
         for (EmpresaObject e: ventanaPrincipal.funcionesEmpresa.getEmpresas()) {
             comboEmpresa.addItem(e.getNombre());
         }
+        cargando = false;
     }
     
 
@@ -96,14 +104,14 @@ public class Catalogo extends javax.swing.JPanel {
         jTable1.setSelectionForeground(new java.awt.Color(83, 100, 82));
         jScrollPane1.setViewportView(jTable1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 570, 190));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 570, 240));
 
         buscarText.setBackground(new java.awt.Color(209, 213, 194));
         buscarText.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         buscarText.setForeground(new java.awt.Color(83, 100, 82));
         buscarText.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         buscarText.setToolTipText("");
-        add(buscarText, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 410, 50));
+        add(buscarText, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 410, 50));
 
         eliminarBtn.setBackground(new java.awt.Color(83, 100, 82));
         eliminarBtn.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
@@ -131,7 +139,7 @@ public class Catalogo extends javax.swing.JPanel {
                 BuscarBtnMousePressed(evt);
             }
         });
-        add(BuscarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 110, 50));
+        add(BuscarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 110, 50));
 
         crearBtn.setBackground(new java.awt.Color(83, 100, 82));
         crearBtn.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
@@ -153,7 +161,7 @@ public class Catalogo extends javax.swing.JPanel {
         comboEmpresa.setBorder(null);
         comboEmpresa.setOpaque(true);
         comboEmpresa.addActionListener(this::comboEmpresaActionPerformed);
-        add(comboEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 570, 50));
+        add(comboEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 570, 40));
 
         modificarBtn.setBackground(new java.awt.Color(83, 100, 82));
         modificarBtn.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
@@ -180,23 +188,23 @@ public class Catalogo extends javax.swing.JPanel {
         if (!tieneEmpresa()) {return;}
         int indexSeleccionado = comboEmpresa.getSelectedIndex();
         miEmpresa = ventanaPrincipal.funcionesEmpresa.getEmpresas().get(indexSeleccionado);
-        ventanaPrincipal.addCat.setEmpresa(miEmpresa);
+        ventanaPrincipal.panelAddCatalogo.setEmpresa(miEmpresa);
         ventanaPrincipal.MostrarAddCatalogo();
     }//GEN-LAST:event_crearBtnMousePressed
 
     private void eliminarBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarBtnMousePressed
-        if (!tieneEmpresa()) {return;} 
-        if (!ValidacionesUtils.confirmacion("Esta seguro que quiere modificar?")) {return;}
+        if (!tieneEmpresa()) {return;}
         
         int fila = jTable1.getSelectedRow();
         int indexEmpresa = comboEmpresa.getSelectedIndex();
         EmpresaObject empresaActual = ventanaPrincipal.funcionesEmpresa.getEmpresas().get(indexEmpresa);
-            if (fila != -1) {
+        if (fila != -1) {
+            if (!ValidacionesUtils.confirmacion("Esta seguro que quiere eliminar esta cuenta??")) {return;}
             empresaActual.getMiCatalogo().eliminarCatalogo(fila);
             llenarTabla();
             JOptionPane.showMessageDialog(this, "Cuenta Eliminada");
         } else {
-            JOptionPane.showMessageDialog(this, "Por favor, selecciona una fila primero");
+            JOptionPane.showMessageDialog(this, "Por favor, selecciona una cuenta primero (una fila)");
         }
     }//GEN-LAST:event_eliminarBtnMousePressed
 
@@ -221,13 +229,21 @@ public class Catalogo extends javax.swing.JPanel {
     }//GEN-LAST:event_BuscarBtnMousePressed
 
     private void comboEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboEmpresaActionPerformed
+        if (cargando) return;
         llenarTabla();
     }//GEN-LAST:event_comboEmpresaActionPerformed
 
     private void modificarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarBtnMouseClicked
         if (!tieneEmpresa()) {return;}
-        if (!ValidacionesUtils.confirmacion("Esta seguro que quiere modificar?")) {return;}
+        
         if (jTable1.isEditing()) {jTable1.getCellEditor().stopCellEditing();}
+        int fila = jTable1.getSelectedRow();
+        
+         if (fila != -1) {
+                if (!ValidacionesUtils.confirmacion("Esta seguro que quieres modificar esta cuenta??")) {return;}
+            } else {
+                JOptionPane.showMessageDialog(this, "Por favor, selecciona una fila primero"); return;
+            }
         
         int index = comboEmpresa.getSelectedIndex();
         FuncionesGestion.EmpresaObject empresaActual = ventanaPrincipal.funcionesEmpresa.getEmpresas().get(index);
@@ -244,7 +260,7 @@ public class Catalogo extends javax.swing.JPanel {
             try {
                 nuevaCantidad = Double.parseDouble(jTable1.getValueAt(i, 4).toString());
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "¡Uy! El importe en la fila " + (i+1) + " está feito. Asegúrate de que sea un número.");
+                JOptionPane.showMessageDialog(null, "Uys " + (i+1) + " Asegúrate de que sea un número.");
                 return; 
             }
             FuncionesGestion.CatalogoObject cuenta = listaCatalogo.get(i);

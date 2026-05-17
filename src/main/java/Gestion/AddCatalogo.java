@@ -19,6 +19,10 @@ public class AddCatalogo extends javax.swing.JPanel {
         this.ventanaPrincipal = ventanaPrincipal;
         AspectoUtils.flatStile();
         initComponents();
+        
+        cantidadInput.putClientProperty("JTextField.placeholderText", "Ingrese el importe (10000)");
+        codigoInput.putClientProperty("JTextField.placeholderText", "Ingrese el codigo de la cuenta");
+        cuentaInput.putClientProperty("JTextField.placeholderText", "Ingrese el nombre de la cuenta");
     }
     
     public void setEmpresa(EmpresaObject empresa) {

@@ -19,6 +19,12 @@ public class AddEmpresa extends javax.swing.JPanel {
         this.ventanaPrincipal = ventanaPrincipal;
         this.cat = cat;
         initComponents();
+        
+        nombreInput.putClientProperty("JTextField.placeholderText", "Ingrese el nombre de la empresa");
+        rfcInput.putClientProperty("JTextField.placeholderText", "Ingrese el RFC de la empresa");
+        giroInput.putClientProperty("JTextField.placeholderText", "Ingrese el giro de la empresa (Comercial)");
+        correoInput.putClientProperty("JTextField.placeholderText", "Ingrese el correo de la empresa (example@gmail.com)");
+        
     }
 
     @SuppressWarnings("unchecked")

@@ -144,16 +144,16 @@ public class Empresa extends javax.swing.JPanel {
     }//GEN-LAST:event_crearBtnMouseClicked
 
     private void eliminarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarBtnMouseClicked
-        if (!ValidacionesUtils.confirmacion("Esta seguro que quiere Eliminar esta fila?")) {return;}
         
         int fila = jTable1.getSelectedRow();
             if (fila != -1) {
+            if (!ValidacionesUtils.confirmacion("Esta seguro que quiere Eliminar esta empresa??")) {return;}
             ventanaPrincipal.funcionesEmpresa.eliminarEmpresa(fila);
             llenarTabla();
             JOptionPane.showMessageDialog(this, "Empresa eliminada");
-        } else {
-            JOptionPane.showMessageDialog(this, "Por favor, selecciona una fila primero");
-        }
+            } else {
+                JOptionPane.showMessageDialog(this, "Por favor, selecciona una fila primero");
+            }
     }//GEN-LAST:event_eliminarBtnMouseClicked
 
     private void BuscarBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BuscarBtnMousePressed
@@ -181,10 +181,15 @@ public class Empresa extends javax.swing.JPanel {
 
     private void modificarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarBtnMouseClicked
         if (jTable1.isEditing()) {jTable1.getCellEditor().stopCellEditing();}
-        
-        if (!ValidacionesUtils.confirmacion("Esta seguro que quiere modificar?")) {return;}
+        int fila = jTable1.getSelectedRow();
         
             ArrayList<FuncionesGestion.EmpresaObject> listaEmpresas = ventanaPrincipal.funcionesEmpresa.getEmpresas();
+            
+            if (fila != -1) {
+                if (!ValidacionesUtils.confirmacion("Esta seguro que quiere modificar?")) {return;}
+            } else {
+                JOptionPane.showMessageDialog(this, "Por favor, selecciona una fila primero"); return;
+            }
 
             for (int i = 0; i < jTable1.getRowCount(); i++) {
             String nuevoNombre = jTable1.getValueAt(i, 0).toString();

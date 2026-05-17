@@ -23,7 +23,6 @@ public class CatalogoFunctions {
         return miCatalogo;
     }
      
-     //YA TE DICE SI ES TRUE O FALSE NO HAY QUE PONER EL IF TAL RETURN FALSE O TRUE
      public boolean empty() { return miCatalogo.isEmpty();}
      
 }
