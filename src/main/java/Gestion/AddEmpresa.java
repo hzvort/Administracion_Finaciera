@@ -24,7 +24,7 @@ public class AddEmpresa extends javax.swing.JPanel {
         rfcInput.putClientProperty("JTextField.placeholderText", "Ingrese el RFC de la empresa");
         giroInput.putClientProperty("JTextField.placeholderText", "Ingrese el giro de la empresa (Comercial)");
         correoInput.putClientProperty("JTextField.placeholderText", "Ingrese el correo de la empresa (example@gmail.com)");
-        
+        periodoInput.putClientProperty("JTextField.placeholderText", "Ingrese el periodo (2024)");
     }
 
     @SuppressWarnings("unchecked")
@@ -38,8 +38,10 @@ public class AddEmpresa extends javax.swing.JPanel {
         rfcInput = new javax.swing.JTextField();
         giro = new javax.swing.JLabel();
         giroInput = new javax.swing.JTextField();
+        periodo = new javax.swing.JLabel();
         correo = new javax.swing.JLabel();
         correoInput = new javax.swing.JTextField();
+        periodoInput = new javax.swing.JTextField();
         cancelBtn = new javax.swing.JLabel();
         acceptBtn = new javax.swing.JLabel();
 
@@ -47,10 +49,12 @@ public class AddEmpresa extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(83, 100, 82));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         nombre.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         nombre.setForeground(new java.awt.Color(222, 213, 200));
         nombre.setText("Nombre de la empresa");
+        jPanel1.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         nombreInput.setBackground(new java.awt.Color(141, 148, 132));
         nombreInput.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
@@ -58,10 +62,12 @@ public class AddEmpresa extends javax.swing.JPanel {
         nombreInput.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         nombreInput.setText("Gamesa");
         nombreInput.setBorder(null);
+        jPanel1.add(nombreInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 510, 46));
 
         rfc.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         rfc.setForeground(new java.awt.Color(222, 213, 200));
         rfc.setText("RFC");
+        jPanel1.add(rfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         rfcInput.setBackground(new java.awt.Color(141, 148, 132));
         rfcInput.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
@@ -69,10 +75,12 @@ public class AddEmpresa extends javax.swing.JPanel {
         rfcInput.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         rfcInput.setText("numerosRandoms12312");
         rfcInput.setBorder(null);
+        jPanel1.add(rfcInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 510, 46));
 
         giro.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         giro.setForeground(new java.awt.Color(222, 213, 200));
         giro.setText("Giro de la empresa");
+        jPanel1.add(giro, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
         giroInput.setBackground(new java.awt.Color(141, 148, 132));
         giroInput.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
@@ -80,10 +88,17 @@ public class AddEmpresa extends javax.swing.JPanel {
         giroInput.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         giroInput.setText("Comercial");
         giroInput.setBorder(null);
+        jPanel1.add(giroInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 510, 46));
+
+        periodo.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        periodo.setForeground(new java.awt.Color(222, 213, 200));
+        periodo.setText("Periodo");
+        jPanel1.add(periodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
 
         correo.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         correo.setForeground(new java.awt.Color(222, 213, 200));
         correo.setText("Correo");
+        jPanel1.add(correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
 
         correoInput.setBackground(new java.awt.Color(141, 148, 132));
         correoInput.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
@@ -91,47 +106,18 @@ public class AddEmpresa extends javax.swing.JPanel {
         correoInput.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         correoInput.setText("correo@gamesa.com");
         correoInput.setBorder(null);
+        correoInput.addActionListener(this::correoInputActionPerformed);
+        jPanel1.add(correoInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 510, 46));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(correo)
-                    .addComponent(correoInput, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(giro)
-                    .addComponent(giroInput, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rfc)
-                    .addComponent(rfcInput, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nombre)
-                    .addComponent(nombreInput, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(nombre)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nombreInput, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rfc)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rfcInput, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(giro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(giroInput, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(correo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(correoInput, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
+        periodoInput.setBackground(new java.awt.Color(141, 148, 132));
+        periodoInput.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        periodoInput.setForeground(new java.awt.Color(83, 100, 82));
+        periodoInput.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        periodoInput.setText("correo@gamesa.com");
+        periodoInput.setBorder(null);
+        jPanel1.add(periodoInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 510, 46));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 550, 340));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 550, 370));
 
         cancelBtn.setBackground(new java.awt.Color(83, 100, 82));
         cancelBtn.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
@@ -178,7 +164,8 @@ public class AddEmpresa extends javax.swing.JPanel {
             nombreInput.getText(),
             rfcInput.getText(),
             giroInput.getText(),
-            correoInput.getText()
+            correoInput.getText(),
+            periodoInput.getText()
         );
         
         ventanaPrincipal.funcionesEmpresa.agregarEmpresa(nueva);
@@ -188,12 +175,17 @@ public class AddEmpresa extends javax.swing.JPanel {
         
         limpiarCampos();
     }//GEN-LAST:event_acceptBtnMousePressed
+
+    private void correoInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_correoInputActionPerformed
     
     private void limpiarCampos() {
         nombreInput.setText("");
         rfcInput.setText("");
         giroInput.setText("");
         correoInput.setText("");
+        
     }
     
     private boolean sameName(JTextField input, JLabel nombre) {
@@ -227,6 +219,8 @@ public class AddEmpresa extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel nombre;
     private javax.swing.JTextField nombreInput;
+    private javax.swing.JLabel periodo;
+    private javax.swing.JTextField periodoInput;
     private javax.swing.JLabel rfc;
     private javax.swing.JTextField rfcInput;
     // End of variables declaration//GEN-END:variables
