@@ -10,6 +10,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import Exportar.ExportadorBalanceCSV;
 import Utils.ValidacionesUtils;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,13 +20,15 @@ public class BalanceGeneral extends javax.swing.JPanel {
     private final Main ventanaPrincipal;
     private final BalanceGeneralFunctions funcionesBg;
     private final ExportadorBalanceCSV exportarBalanceCSV;
+    public static double tipoCambio  = 1.0;
+    private boolean isGenerated = false;
     
     public BalanceGeneral(Main ventanaPrincipal) {
         initComponents();
         this.funcionesBg = new BalanceGeneralFunctions(ventanaPrincipal);
         this.exportarBalanceCSV = new ExportadorBalanceCSV(ventanaPrincipal);
         this.ventanaPrincipal = ventanaPrincipal;
-        cambioInput.putClientProperty("JTextField.placeholderText", "Ingrese el cambio que desea (18.87)");
+        cambioInput.putClientProperty("JTextField.placeholderText", "1 = mx (ingrese cuanto equivale un peso mx)");
         
         AspectoUtils.flatStile();
         UIManager.put( "ComboBox.buttonBackground", new java.awt.Color(83,100,82) );
@@ -51,7 +55,7 @@ public class BalanceGeneral extends javax.swing.JPanel {
 
             Object[] fila = {
                 cuenta.getNombre(),
-                cuenta.getCantidad()
+                cuenta.getCantidad() * tipoCambio
         };
         modelo.addRow(fila);
         }
@@ -79,14 +83,15 @@ public class BalanceGeneral extends javax.swing.JPanel {
         }
     
     private double llenarGenerarReporteBalance(int index,String tipo1, String tipo2, String titulo, JLabel label ) {
-        double numero = funcionesBg.sumaTotal(index, tipo1, tipo2);
+        double numero = funcionesBg.sumaTotal(index, tipo1, tipo2) * tipoCambio;
         label.setText(titulo + " = " + numero); return numero;
     }
     
     private double llenarGenerarReporteBalance(int index,String tipo1, String tipo2) {
-        double numero = funcionesBg.sumaTotal(index, tipo1, tipo2);
+        double numero = funcionesBg.sumaTotal(index, tipo1, tipo2) * tipoCambio;
         return numero;
     }
+    
     
     private boolean generarBalance() {
     String TextoComboBox = comboBalance.getSelectedItem().toString();
@@ -260,7 +265,7 @@ public class BalanceGeneral extends javax.swing.JPanel {
                 cambioBtnMousePressed(evt);
             }
         });
-        add(cambioBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 240, 40));
+        add(cambioBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, 250, 40));
 
         pasivoResult.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         pasivoResult.setForeground(new java.awt.Color(83, 100, 82));
@@ -280,20 +285,38 @@ public class BalanceGeneral extends javax.swing.JPanel {
 
     private void generarBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generarBtnMousePressed
         if (!generarBalance()) {return;}
+        isGenerated = true;
     }//GEN-LAST:event_generarBtnMousePressed
 
     private void cambioBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambioBtnMousePressed
         if (!ValidacionesUtils.doubleCheck(cambioInput)) { return;}
+        if (!isGenerated) {
+            JOptionPane.showMessageDialog(null,"Porfavor genere el balance general primero");
+            return;
+        }
+        try {
+            tipoCambio = Double.parseDouble(cambioInput.getText().trim());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Porfavor Ingrese un tipo de cambio valido");
+            return;
+        }
+        generarBalance();
     }//GEN-LAST:event_cambioBtnMousePressed
 
     private void ExportarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExportarMouseClicked
-        if (!generarBalance()) {return;}
+        if (!isGenerated) {
+            JOptionPane.showMessageDialog(null,"Porfavor genere el balance general primero");
+            return;
+        }
         
         int index = comboBalance.getSelectedIndex();
+        EmpresaObject empresaActual = ventanaPrincipal.funcionesEmpresa.getEmpresas().get(index);
         String contenido = """
-                         Estado de situcion finaciera
-                         Clasificacion,Cuenta,Importe,Total Por Grupo
-                         """;
+                         Estado de situcion finaciera""" + "\n";
+        contenido += empresaActual.getNombre() + "\n";
+        contenido +=  LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "," + "tipo de cambio" + "\n";
+        contenido += "MX NN PESOS"  + "," + tipoCambio + "\n" + "\n";
+        contenido += "Clasificacion,Cuenta,Importe,Total Por Grupo \n";
         contenido = exportarBalanceCSV.filtro(index, "Actico circulante", "ACTIVO",contenido, llenarGenerarReporteBalance(index, "Actico circulante", "PORFA SE MI PANDA FAVORITO"));
         contenido = exportarBalanceCSV.filtro(index, "Activo no cirulante", "",contenido, llenarGenerarReporteBalance(index, "Activo no cirulante", "Y")) + "\n";
         contenido = exportarBalanceCSV.filtro(index, "Pasivo a corto plazo", "PASIVO",contenido, llenarGenerarReporteBalance(index, "Pasivo a corto plazo", "A"));

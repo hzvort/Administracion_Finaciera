@@ -16,6 +16,7 @@ App\Login$2.class
 Gestion\Empresa$4.class
 Gestion\Catalogo$1.class
 FuncionesReportes\EstadoDeResultadoFunctions.class
+Reportes\EstadoDeResultado$2.class
 App\Main$4.class
 App\Main$7.class
 Reportes\BalanceGeneral$1.class
@@ -41,6 +42,7 @@ Gestion\AddEmpresa$2.class
 Reportes\BalanceGeneral$3.class
 App\Creditos.class
 Gestion\Empresa.class
+Exportar\ExportadorEstadoCSV.class
 Reportes\EstadoDeResultado.class
 Gestion\Catalogo$3.class
 App\Login$1.class

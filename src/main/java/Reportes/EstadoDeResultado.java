@@ -4,20 +4,26 @@ import App.Main;
 import FuncionesGestion.CatalogoObject;
 import FuncionesGestion.EmpresaObject;
 import FuncionesReportes.EstadoDeResultadoFunctions;
+import Exportar.ExportadorEstadoCSV;
 import Utils.AspectoUtils;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class EstadoDeResultado extends javax.swing.JPanel {
     
-    Main ventanaPrincipal;
-    EstadoDeResultadoFunctions funcionesER;
+    private final Main ventanaPrincipal;
+    private final EstadoDeResultadoFunctions funcionesER;
+    private final ExportadorEstadoCSV exportarEstadoCSV;
+    private boolean isGenerated = false;
     
     public EstadoDeResultado(Main ventanaPrincipal) {
         initComponents();
         this.ventanaPrincipal = ventanaPrincipal;
         this.funcionesER = new EstadoDeResultadoFunctions(ventanaPrincipal);
+        this.exportarEstadoCSV = new ExportadorEstadoCSV(ventanaPrincipal);
         
         AspectoUtils.tableAspect(utilidadBrutaTable); AspectoUtils.tableAspect(UtilidadAntesImpuestoTable);
         AspectoUtils.tableAspect(UtilidadNetaTable); AspectoUtils.tableAspect(UtilidadOperacionesTable);
@@ -116,6 +122,11 @@ public class EstadoDeResultado extends javax.swing.JPanel {
         ExportarBtn.setText("Exportar");
         ExportarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ExportarBtn.setOpaque(true);
+        ExportarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ExportarBtnMouseClicked(evt);
+            }
+        });
         add(ExportarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, 120, 50));
 
         comboEstado.setBackground(new java.awt.Color(83, 100, 82));
@@ -142,6 +153,8 @@ public class EstadoDeResultado extends javax.swing.JPanel {
                 "Title 1", "Title 2"
             }
         ));
+        utilidadBrutaTable.setSelectionBackground(new java.awt.Color(209, 213, 194));
+        utilidadBrutaTable.setSelectionForeground(new java.awt.Color(83, 100, 82));
         jScrollPane3.setViewportView(utilidadBrutaTable);
 
         add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 240, 120));
@@ -162,6 +175,8 @@ public class EstadoDeResultado extends javax.swing.JPanel {
                 "Title 1", "Title 2"
             }
         ));
+        UtilidadOperacionesTable.setSelectionBackground(new java.awt.Color(209, 213, 194));
+        UtilidadOperacionesTable.setSelectionForeground(new java.awt.Color(83, 100, 82));
         jScrollPane1.setViewportView(UtilidadOperacionesTable);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 240, 120));
@@ -182,6 +197,8 @@ public class EstadoDeResultado extends javax.swing.JPanel {
                 "Title 1", "Title 2"
             }
         ));
+        UtilidadNetaTable.setSelectionBackground(new java.awt.Color(209, 213, 194));
+        UtilidadNetaTable.setSelectionForeground(new java.awt.Color(83, 100, 82));
         jScrollPane2.setViewportView(UtilidadNetaTable);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, 240, 120));
@@ -202,6 +219,8 @@ public class EstadoDeResultado extends javax.swing.JPanel {
                 "Title 1", "Title 2"
             }
         ));
+        UtilidadAntesImpuestoTable.setSelectionBackground(new java.awt.Color(209, 213, 194));
+        UtilidadAntesImpuestoTable.setSelectionForeground(new java.awt.Color(83, 100, 82));
         jScrollPane4.setViewportView(UtilidadAntesImpuestoTable);
 
         add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, 240, 120));
@@ -249,11 +268,22 @@ public class EstadoDeResultado extends javax.swing.JPanel {
 
     private void generarBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generarBtnMousePressed
         String TextoComboBox = comboEstado.getSelectedItem().toString();
-        if (TextoComboBox.equals("Sin Empresas")) {JOptionPane.showMessageDialog(null, "Porfavor cree una empresa antes y sus cuentas"); return;}
-        generarEstadoDeResultado();
+        if (TextoComboBox.equals("Sin Empresas")) {
+        JOptionPane.showMessageDialog(null, "Porfavor cree una empresa antes y sus cuentas"); 
+        ventanaPrincipal.mostrarEmpresa(); 
+        return;
+    }
         
         int index = comboEstado.getSelectedIndex();
+        EmpresaObject empresaActual = ventanaPrincipal.funcionesEmpresa.getEmpresas().get(index);
         
+        if (empresaActual.getMiCatalogo().getMiCatalogo().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Porfavor cree las cuentas primero"); 
+            ventanaPrincipal.MostrarCatalogo(); 
+            return;
+        }
+        
+        generarEstadoDeResultado();
         double utilidadBruta = funcionesER.calcularUtilidadBruta(index);
         double utilidadOperacion = funcionesER.calcularUtilidadDeOperaciones(index, utilidadBruta);
         double antesImpuesto = funcionesER.calcularUtilidadAntesDeImpuesto(index, utilidadOperacion);
@@ -264,7 +294,41 @@ public class EstadoDeResultado extends javax.swing.JPanel {
         UtilidadOperacionesResult.setText("Utilidad de operaciones = " + utilidadOperacion);
         UtilidadAntesImpuestoResult.setText("Utilidad antes de impuesto = " + antesImpuesto);
         UtilidadNetaResult.setText("Utilidad Neta = " + neto);
+        isGenerated = true;
     }//GEN-LAST:event_generarBtnMousePressed
+
+    private void ExportarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExportarBtnMouseClicked
+        if (!isGenerated) {
+            JOptionPane.showMessageDialog(null,"Porfavor genere el estado de resultados primero");
+            return;
+        }
+        int index = comboEstado.getSelectedIndex();
+        EmpresaObject empresaActual = ventanaPrincipal.funcionesEmpresa.getEmpresas().get(index);
+        
+        String contenido = """
+                         Estado de resultado""" + "\n";
+        contenido += empresaActual.getNombre() + "\n";
+        contenido +=  LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "\n";
+        contenido += "MX NN PESOS" + "\n \n";
+        
+        double utilidadBruta = funcionesER.calcularUtilidadBruta(index);
+        double utilidadOperacion = funcionesER.calcularUtilidadDeOperaciones(index, utilidadBruta);
+        double antesImpuesto = funcionesER.calcularUtilidadAntesDeImpuesto(index, utilidadOperacion);
+        double neto = funcionesER.calcularUtilidadNeta(index, antesImpuesto);
+
+        contenido = exportarEstadoCSV.filtro(index, "Ventas", contenido);
+        contenido = exportarEstadoCSV.filtro(index, "Costo de venta", contenido);
+        contenido += "Utilidad bruta,," + "$" + utilidadBruta + "\n \n";
+        contenido = exportarEstadoCSV.filtro(index, "Gastos de operación", contenido);
+        contenido += "Utilidad de operaciones,," + "$" + utilidadOperacion + "\n \n";
+        contenido = exportarEstadoCSV.filtro(index, "Productos financieros", contenido);
+        contenido = exportarEstadoCSV.filtro(index, "Gastos financieros", contenido);
+        contenido += "Utilidad antes de impuesto,," + "$" + antesImpuesto + "\n \n";
+        contenido = exportarEstadoCSV.filtro(index, "Impuestos", contenido);
+        contenido += "Utilidad neta,," + "$" + neto + "\n";
+
+        ExportadorEstadoCSV.crearArchivo(contenido, comboEstado.getSelectedItem().toString());
+    }//GEN-LAST:event_ExportarBtnMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
